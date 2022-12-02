@@ -9,7 +9,7 @@ Writing assignments isn't necessarily a joyful activity. Out of a need to reduce
 
 ## How do I use this template?
 
-Download the latest version of this template [here](). When using [Overleaf](https://www.overleaf.com/project) press "New Project" > "Upload Project" and select the downloaded ZIP archive.
+Download the latest version of this template [here](https://github.com/Smonman/tuwien-assignment-template/releases). When using [Overleaf](https://www.overleaf.com/project) press "New Project" > "Upload Project" and select the downloaded ZIP archive.
 
 ## What can this template do?
 
