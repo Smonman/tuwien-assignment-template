@@ -1,39 +1,41 @@
-%%% TEMPLATE
+%%% TUWIEN ASSIGNMENT TEMPLATE
 % Author: Simon Josef Kreuzpointner
 % Date: 02.12.2022
 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tuwienassignment}[2022/12/01 inofficial TU Vienna assigment template]
+
 % PACKAGES
-\usepackage[a4paper,top=3cm,bottom=2cm,left=2cm,right=2cm,headsep=1cm]{geometry} % layout
-\usepackage[utf8]{inputenc} % input encoding
-\usepackage[T1]{fontenc} % font encoding for umlaute
-\usepackage[english,naustrian]{babel} % language
-\usepackage{csquotes} % enqote
-\usepackage{iflang} % conditional statements based on selected language
-\usepackage{ifthen} % for conditinal branching
-\usepackage[skip=4pt, indent=10pt]{parskip} % spacing between paragraphs
-\usepackage{titling} % title
-\usepackage{fancyhdr} % header and footer
-\usepackage{amsmath} % math
-\usepackage{amssymb} % math symbols
-\usepackage{mathtools} % enhances amsmath
-\usepackage{amsthm} % 
-\usepackage{microtype} % improves the spacing between words and letters
-\usepackage[inline]{enumitem} % horizontal lists
-\usepackage{graphicx} % graphics, images
-\usepackage{array} % extension of array and tabular environments
-\usepackage{xcolor} % work with colors
-\usepackage{fp} % fixed point arithmetic
-\usepackage{booktabs} % better table design
-\usepackage{tabularx} % better table layout
-\usepackage{makecell} % table cell configuration
-\usepackage{listings} % code listing
-\usepackage{pgfkeys} % pgf keys
-\usepackage{tikz} % draw diagrams and figures
-\usepackage{varwidth} % variable width mini-page
-\usepackage{float} % 
-\usepackage{lipsum} % dummy text
+\RequirePackage[a4paper,top=3cm,bottom=2cm,left=2cm,right=2cm,headsep=1cm]{geometry} % layout
+\RequirePackage[utf8]{inputenc} % input encoding
+\RequirePackage[T1]{fontenc} % font encoding for umlaute
+\RequirePackage[english,naustrian]{babel} % language
+\RequirePackage{csquotes} % enqote
+\RequirePackage{iflang} % conditional statements based on selected language
+\RequirePackage{ifthen} % for conditinal branching
+\RequirePackage[skip=4pt, indent=10pt]{parskip} % spacing between paragraphs
+\RequirePackage{titling} % title
+\RequirePackage{fancyhdr} % header and footer
+\RequirePackage{amsmath} % math
+\RequirePackage{amssymb} % math symbols
+\RequirePackage{mathtools} % enhances amsmath
+\RequirePackage{amsthm} % 
+\RequirePackage{microtype} % improves the spacing between words and letters
+\RequirePackage[inline]{enumitem} % horizontal lists
+\RequirePackage{graphicx} % graphics, images
+\RequirePackage{array} % extension of array and tabular environments
+\RequirePackage{xcolor} % work with colors
+\RequirePackage{fp} % fixed point arithmetic
+\RequirePackage{booktabs} % better table design
+\RequirePackage{tabularx} % better table layout
+\RequirePackage{makecell} % table cell configuration
+\RequirePackage{listings} % code listing
+\RequirePackage{pgfkeys} % pgf keys
+\RequirePackage{tikz} % draw diagrams and figures
+\RequirePackage{varwidth} % variable width mini-page
+\RequirePackage{float} % 
 % MUST BE PLACED LAST
-\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\RequirePackage[colorlinks=true, allcolors=blue]{hyperref}
 
 %%% COLORS
 % standard colors
@@ -234,3 +236,41 @@ shorten >=2pt
 {\renewcommand{\arraystretch}{1.25}\par\noindent
 \tabularx{\columnwidth}{>{$}l<{$} @{}>{\: $}c<{$ \:}@{} >{\raggedright\arraybackslash}X}}
 {\endtabularx\par\vspace{\belowdisplayskip}}
+
+%%% EXERCISE AND SOLUTRION
+% counters
+\newcounter{exercisecounter}
+\newcounter{solutioncounter}
+% exercise
+\pgfkeys{
+  /exercise/.is family, /exercise,
+  title/.estore in=\exercisetitle,
+  solution/title/.estore in=\solutiontitle,
+  default/.style={title={Exercise},solution/title={Solution}}
+}
+\newenvironment{exercise}[1][]{
+  \pgfkeys{/exercise, default, #1}
+  \bigskip%
+  \noindent%
+  \setcounter{solutioncounter}{1}%
+  \refstepcounter{exercisecounter}%
+  \textbf{\large \exercisetitle \ \theexercisecounter}%
+  \newline%
+}{
+  \par%
+  \bigskip%
+}
+\numberwithin{exercisecounter}{section}
+% solution
+\newenvironment{solution}[1][]{
+  \pgfkeys{/exercise, default, #1}
+  \par%
+  \medskip%
+  \noindent%
+  \textbf{\solutiontitle \ \thesolutioncounter}%
+  \newline%
+}{
+  \refstepcounter{solutioncounter}%
+  \par%
+  \medskip%
+}

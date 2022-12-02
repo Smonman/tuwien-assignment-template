@@ -4,7 +4,7 @@
 %%%
 %%% PLACE CUSTOM STYLES HERE
 %%%
-
+\usepackage{lipsum} % dummy text
 %%%
 
 \title{Title}
@@ -64,8 +64,44 @@
         \end{enumerate}
 \end{enumerate}
 
-\section{Math}
+\newpage
+\section{Exercises and Solutions}
+Environment: \verb|exercise| produces a numbered exercise, which prefixes the current section on their counter. The section can correspond to each exercise sheet for example.
 
+\noindent Environment: \verb|solution| produces a numbered solution. A solution has to be placed \emph{inside} of the exercise. Solutions will be numbered accordingly inside of an exercise environment. The number for a solution can be changed by writing the macro \verb|\setcounter{solutioncounter}{x}| where \texttt{x} is the number the counter should be set to.
+The numberformat can also be changed by calling the macro \verb|\renewcommand{\thesolutioncounter}{x}| where \verb|x| is the format. For example for roman numerals it would be \verb|\roman{solutioncounter}|.
+
+\begin{exercise}
+  \lipsum[1-1]
+  \begin{solution}
+    \lipsum[1-1]
+  \end{solution}
+  \begin{solution}
+    \lipsum[1-1]
+  \end{solution}
+  \begin{solution}
+    \lipsum[1-1]
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}[title=Übung]
+  \lipsum[1-1]
+  \begin{solution}
+    \lipsum[1-1]
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}
+  \renewcommand{\thesolutioncounter}{(\roman{solutioncounter})}%
+  \lipsum[1-1]
+  \begin{solution}
+  \end{solution}
+  \begin{solution}
+  \end{solution}
+\end{exercise}
+
+
+\section{Math}
 \subsection{Abs and Norm}
 Commands \verb|\abs| and \verb|\norm|\footnote{see https://tex.stackexchange.com/a/43009} produce the following:
 \begin{table}[!ht]
