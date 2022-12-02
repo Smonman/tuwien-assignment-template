@@ -61,6 +61,10 @@ The package [`babel`](https://ctan.org/pkg/babel) is used for language support. 
 
 The package [`lstlisting`]() is imported for displaying code. Also a style for code output and pseudocode are provided.
 
+### Graphics
+
+The standard `graphicspath` is set to `./img/`.
+
 ## Changelog
 
 ### 0.1.0 first version
