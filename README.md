@@ -53,6 +53,8 @@ Moreover some math-related commands are changed or added:
 - `\ltrue` is an alias for verum
 - `\lfalse` is an alias for falsum
 
+For more details regarding Latex in general take a look at this [cheatsheet](https://de.overleaf.com/latex/templates/a-quick-guide-to-latex/fghqpfgnxggz).
+
 ### Language
 
 The package [`babel`](https://ctan.org/pkg/babel) is used for language support. With the standard being Englisch. Additionally the package [`csqotes`](https://ctan.org/pkg/csquotes) is imported, for correct qotes based on the primary language selected via `babel`.
