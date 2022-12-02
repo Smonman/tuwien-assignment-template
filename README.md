@@ -9,6 +9,8 @@ Writing assignments isn't necessarily a joyful activity. Out of a need to reduce
 
 ## How do I use this template?
 
+Download the latest version of this template [here](). When using [Overleaf](https://www.overleaf.com/project) press "New Project" > "Upload Project" and select the downloaded ZIP archive.
+
 ## What can this template do?
 
 This template comes with a sleek design that is kept closely to the originial Latex article style. It also provides environments for exercises and solutions. Which are conveniently numbered.
