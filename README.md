@@ -67,4 +67,8 @@ The standard `graphicspath` is set to `./img/`.
 
 ## Changelog
 
+### 0.1.1
+
+- update the `graphicspath`
+
 ### 0.1.0 first version
