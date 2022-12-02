@@ -74,6 +74,7 @@
 % after author
 \postauthor{
   \end{raggedright}
+  \@matrikelnr
   \newline
 }
 % before date
@@ -89,11 +90,16 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\nouppercase{\leftmark}}
+\fancyhead[R]{\@author \ \@matrikelnr}
 \renewcommand{\headrulewidth}{0.2pt}
 \fancyfoot[C]{\thepage}
 \renewcommand{\footrulewidth}{0.2pt}
 \renewcommand{\footruleskip}{1em}
 \renewcommand{\subsectionmark}[1]{\markright{\thesubsection\ #1}}
+
+\makeatletter
+\DeclareRobustCommand\matrikelnr[1]{\gdef\@matrikelnr{#1}}
+\makeatother
 
 %%% ITEMIZE STYLE
 \renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$}
