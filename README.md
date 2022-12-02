@@ -1,7 +1,7 @@
 # tuwien-assignment-template
-An inofficial Latex template for TU Vienna assignments.
+An inofficial Latex template for TU Vienna assignments. Take a look at the [example](https://github.com/Smonman/tuwien-assignment-template/blob/main/example.pdf).
 
-This Latex template aims to streamline the writing of assignments written digitally. Take a look at the [example](https://github.com/Smonman/tuwien-assignment-template/blob/main/example.pdf).
+This Latex template aims to streamline the writing of assignments written digitally. 
 
 ## Why should I use this template?
 
