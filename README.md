@@ -1,4 +1,5 @@
 # tuwien-assignment-template
+
 An inofficial Latex template for TU Vienna assignments. Take a look at the [example](https://github.com/Smonman/tuwien-assignment-template/blob/main/example.pdf).
 
 _This Latex template aims to streamline the writing of digital assignments._
@@ -19,23 +20,28 @@ This template comes with a sleek design that is kept closely to the originial La
 
 `exercise` is an environment for the exercises, including the solutions. Exercises are numbered within a `section`. The idea is, that each section represents a singe exercise sheet. Inside of this `exercise` environment can multiple `solution` environments be declared. These are numbered within the parent exercise environment.
 
-There are also minute possibilities to customise these environments. Each `exercise` environment has the following keys: 
+There are also minute possibilities to customise these environments. Each `exercise` environment has the following keys:
+
 - `title` the title of the exercise (default "Exercise")
 - `solution/title` the title for the solution declared within the exercise (default "Solution")
 
 #### Customization
 
 If a specific solution counter should be set to a specific value, this can be done via the
+
 ```tex
 \setcounter{solutioncounter}{x}
 ```
+
 macro, where `x` is the new starting number for the counter.
 > **Note**: that the following solutions will also be affected.
 
 If the numbering style of the solutions within an `exercise` environment should be changed, this currently cannot be done via keys, but has to be done _manually_ via the command:
+
 ```tex
 \renewcommand{\thesolutioncounter}{(\roman{solutioncounter})}
 ```
+
 at the top inside of the corresponding `exercise` environment. In this case, the enumeration will be lowercase roman numerals in braces.
 
 ### Math
@@ -61,11 +67,11 @@ The package [`babel`](https://ctan.org/pkg/babel) is used for language support. 
 
 ### Code
 
-The package [`lstlisting`]() is imported for displaying code. Also a style for code output and pseudocode are provided.
+The package [`listings`](https://ctan.org/pkg/listings) is imported for displaying code. Also a style for code output and pseudocode are provided. The standard path for script files is set to `./scripts/`. This can be changed with the `\lstinputpath{{<path>}}` command.
 
 ### Graphics
 
-The standard `graphicspath` is set to `./img/`.
+The standard `graphicspath` is set to `./img/`. This can be changed with the `\graphicspath{{<path>}}` command.
 
 ## Changelog
 

@@ -109,7 +109,7 @@
 %%% LSTLISTING STYLE
 \lstdefinestyle{lststandardstyle}{
   backgroundcolor=\color{codelightgray},
-  basicstyle=\footnotesize\ttfamily,
+  basicstyle=\ttfamily,
   breakatwhitespace=false,
   breaklines=true,
   captionpos=t,
@@ -123,7 +123,7 @@
   morekeywords={*,...},
   numbers=left,
   numbersep=5pt,
-  numberstyle=\tiny\color{codegray},
+  numberstyle=\sffamily\small\color{codegray},
   rulecolor=\color{black},
   showspaces=false,
   showstringspaces=false,
@@ -135,10 +135,11 @@
   linewidth=\columnwidth,
   xleftmargin=3.4pt,
   xrightmargin=3.4pt,
+  postbreak=\mbox{\textcolor{gray}{\(\hookrightarrow\)}\space},
 }
 \lstdefinestyle{lstoutput}{
   backgroundcolor=\color{codelightgray},
-  basicstyle=\footnotesize\ttfamily,
+  basicstyle=\ttfamily,
   breakatwhitespace=false,
   breaklines=true,
   captionpos=t,
@@ -154,7 +155,7 @@
 }
 \lstdefinelanguage{pseudo}{
   mathescape=true,
-  basicstyle=\scriptsize,
+  basicstyle=,
   keywordstyle=\color{black}\bfseries\em,
   morekeywords={function, returns, return, if, then, else, and, or, not, loop, do, while, for, each, switch, case, foreach, begin, end, endif, until, repeat, null},
   sensitive=false,
@@ -165,8 +166,11 @@
 \lstset{
   style=lststandardstyle,
   framerule=0.8pt,
-  rulesep=0pt
+  rulesep=0pt,
+  inputpath={{./scripts/}}
 }
+
+\newcommand{\lstinputpath}[1]{\lstset{inputpath=#1}}
 
 %%% TIKZ
 % tikz libraries
