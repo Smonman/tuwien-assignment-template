@@ -67,12 +67,29 @@ The package [`babel`](https://ctan.org/pkg/babel) is used for language support. 
 
 ### Code
 
-The package [`listings`](https://ctan.org/pkg/listings) is imported for displaying code. Also a style for code output and pseudocode are provided. The standard path for script files is set to `./scripts/`. This can be changed with the `\lstinputpath{{<path>}}` command.
+The package [`listings`](https://ctan.org/pkg/listings) is imported for displaying code. Also a style for code output and pseudocode are provided. The standard path for script files is set to `./scripts/`. This can be changed with the
+
+```tex
+\lstinputpath{{<path>}}
+```
+
+command.
 
 ### Graphics
 
-The standard `graphicspath` is set to `./img/`. This can be changed with the `\graphicspath{{<path>}}` command.
+The standard `graphicspath` is set to `./img/`. This can be changed with the 
+
+````tex
+\graphicspath{{<path>}}
+```
+
+command.
 
 ## Changelog
+
+### 0.1.1 
+
+- add listings file path
+- listings now show linebreaks resulted from long lines
 
 ### 0.1.0 first version
