@@ -77,7 +77,7 @@ command.
 
 ### Graphics
 
-The standard `graphicspath` is set to `./img/`. This can be changed with the 
+The standard `graphicspath` is set to `./img/`. This can be changed with the
 
 ```tex
 \graphicspath{{<path>}}
