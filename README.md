@@ -87,4 +87,9 @@ command.
 
 ## Changelog
 
+### 0.1.1 
+
+- add listings file path
+- listings now show linebreaks resulted from long lines
+
 ### 0.1.0 first version
