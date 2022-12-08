@@ -66,10 +66,10 @@
 
 \newpage
 \section{Exercises and Solutions}
-Environment: \verb|exercise| produces a numbered exercise, which prefixes the current section on their counter. The section can correspond to each exercise sheet for example.
+Environment: \lstinline{exercise} produces a numbered exercise, which prefixes the current section on their counter. The section can correspond to each exercise sheet for example.
 
-\noindent Environment: \verb|solution| produces a numbered solution. A solution has to be placed \emph{inside} of the exercise. Solutions will be numbered accordingly inside of an exercise environment. The number for a solution can be changed by writing the macro \verb|\setcounter{solutioncounter}{x}| where \texttt{x} is the number the counter should be set to.
-The numberformat can also be changed by calling the macro \verb|\renewcommand{\thesolutioncounter}{x}| where \verb|x| is the format. For example for roman numerals it would be \verb|\roman{solutioncounter}|.
+\noindent Environment: \lstinline{solution} produces a numbered solution. A solution has to be placed \emph{inside} of the exercise. Solutions will be numbered accordingly inside of an exercise environment. The number for a solution can be changed by writing the macro \lstinline|\setcounter{solutioncounter}{x}| where \lstinline{x} is the number the counter should be set to.
+The numberformat can also be changed by calling the macro \lstinline|\renewcommand{\thesolutioncounter}{x}| where \lstinline{x} is the format. For example for roman numerals it would be \lstinline|\roman{solutioncounter}|.
 
 \begin{exercise}
   \lipsum[1-1]
@@ -103,7 +103,7 @@ The numberformat can also be changed by calling the macro \verb|\renewcommand{\t
 
 \section{Math}
 \subsection{Abs and Norm}
-Commands \verb|\abs| and \verb|\norm|\footnote{see https://tex.stackexchange.com/a/43009} produce the following:
+Commands \verb|\abs| and \verb|\norm|\footnote{see \url{https://tex.stackexchange.com/a/43009}} produce the following:
 \begin{table}[!ht]
   \centering
   \begin{tabular}{ccc}
@@ -130,7 +130,7 @@ Command: \verb|\mtupelempty| produces the following:
 \[\mtupelempty\]
 
 \subsection{Conditions}
-Environment: \verb|conditions| \footnote{see https://tex.stackexchange.com/a/95842} can be used for the following:
+Environment: \verb|conditions| \footnote{see \url{https://tex.stackexchange.com/a/95842}} can be used for the following:
 \\
 Boltzmann distribution: state occupation probability of a thermodynamical system within fixed temperature \(T\): \[p(x) = \alpha \cdot e^{-\frac{E(x)}{k \cdot T}}\] where:
 \begin{conditions}
@@ -235,5 +235,20 @@ function Tree-Search(problem) returns a solution, or failure
     if the node contains a goal state then return the corresponding solution
     expand the chosen node, adding the resulting nodes to the frontier
 \end{lstlisting}
+
+\subsection{Standard}
+
+\begin{lstlisting}
+This is a very very very very very very very very very very very very very very very very very very very very very long line.
+\end{lstlisting}
+
+\section{Images}
+Take a look at this example image: \footnote{Copyright free image from \url{https://pixabay.com/illustrations/background-pattern-lemon-texture-6703215/}}
+\begin{figure}[h!t]
+  \centering
+  \includegraphics[scale=0.5]{happy_lemons.png}
+  \caption{Happy Lemons}
+  \label{fig:happylemons}
+\end{figure}
 
 \end{document}
