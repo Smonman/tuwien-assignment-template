@@ -79,7 +79,7 @@ command.
 
 The standard `graphicspath` is set to `./img/`. This can be changed with the 
 
-````tex
+```tex
 \graphicspath{{<path>}}
 ```
 
@@ -87,7 +87,7 @@ command.
 
 ## Changelog
 
-### 0.1.1 
+### 0.1.1
 
 - add listings file path
 - listings now show linebreaks resulted from long lines
