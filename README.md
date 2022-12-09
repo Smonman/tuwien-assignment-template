@@ -52,9 +52,8 @@ Moreover some math-related commands are changed or added:
 
 - `\abs` and `\norm` now scale with the content
 - `\mset{}` creates a simple set, with scaling braces and spacing
-- `\msetempty` creates an empty set
+- `\mset*{}` creates an empty set, with scaling braces and spacing and displays the empty set symbol if no elements are in the set
 - `\mtupel{}` creates a simple tupel, with angled brackets and spacing
-- `\mtupelempty` creates an empty tupel
 - `conditions` is an environment to list mathematical conditions or explanations
 - `\ltrue` is an alias for verum
 - `\lfalse` is an alias for falsum
