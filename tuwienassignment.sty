@@ -217,11 +217,13 @@ shorten >=2pt
 
 %%% NEW COMMANDS
 % math set
-\newcommand{\mset}[1]{\ensuremath{\left\{\: #1 \:\right\}}}
-\newcommand{\msetempty}{\ensuremath{\{\}}}
+\makeatletter
+\newcommand{\mset}{\@ifstar{\@@mset}{\@mset}}
+\newcommand{\@mset}[1]{\ensuremath{\left\{ \ifthenelse{\equal{#1}{}}{}{\: #1 \:} \right\}}}
+\newcommand{\@@mset}[1]{\ensuremath{\left\{ \: \ifthenelse{\equal{#1}{}}{\emptyset}{#1} \: \right\}}}
+\makeatother
 % math tuple
-\newcommand{\mtupel}[1]{\ensuremath{\langle \: #1 \: \rangle}}
-\newcommand{\mtupelempty}{\ensuremath{\langle \rangle}}
+\newcommand{\mtupel}[1]{\ensuremath{\left\langle \ifthenelse{\equal{#1}{}}{}{\: #1 \:} \right\rangle}}
 % logical true and false
 \newcommand{\ltrue}{\top}
 \newcommand{\lfalse}{\bot}
