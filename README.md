@@ -53,7 +53,7 @@ Moreover some math-related commands are changed or added:
 - `\abs` and `\norm` now scale with the content
 - `\mset{}` creates a simple set, with scaling braces and spacing
 - `\mset*{}` creates an empty set, with scaling braces and spacing and displays the empty set symbol if no elements are in the set
-- `\mtupel{}` creates a simple tupel, with angled brackets and spacing
+- `\mtupel{}` creates a simple tupel, with scaling angled brackets and spacing
 - `conditions` is an environment to list mathematical conditions or explanations
 - `\ltrue` is an alias for verum
 - `\lfalse` is an alias for falsum
@@ -85,6 +85,12 @@ The standard `graphicspath` is set to `./img/`. This can be changed with the
 command.
 
 ## Changelog
+
+### 0.1.2
+
+- add `\mset*`
+- removed `\msetempty` and `\mtupelempty`
+- `\mtupel` now scales the angled brackets according to its elements
 
 ### 0.1.1
 
