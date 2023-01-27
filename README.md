@@ -53,7 +53,7 @@ Moreover some math-related commands are changed or added:
 - `\abs` and `\norm` now scale with the content
 - `\mset{}` creates a simple set, with scaling braces and spacing
 - `\mset*{}` creates an empty set, with scaling braces and spacing and displays the empty set symbol if no elements are in the set
-- `\msetmid` creats a simple set with scaling braces and the scaling mid symbol
+- `\msetmid` creates a simple set with scaling braces and the scaling mid symbol
 - `\mtupel{}` creates a simple tupel, with scaling angled brackets and spacing
 - `conditions` is an environment to list mathematical conditions or explanations
 - `\ltrue` is an alias for verum
