@@ -53,6 +53,7 @@ Moreover some math-related commands are changed or added:
 - `\abs` and `\norm` now scale with the content
 - `\mset{}` creates a simple set, with scaling braces and spacing
 - `\mset*{}` creates an empty set, with scaling braces and spacing and displays the empty set symbol if no elements are in the set
+- `\msetmid` creats a simple set with scaling braces and the scaling mid symbol
 - `\mtupel{}` creates a simple tupel, with scaling angled brackets and spacing
 - `conditions` is an environment to list mathematical conditions or explanations
 - `\ltrue` is an alias for verum
@@ -63,6 +64,12 @@ For more details regarding Latex in general take a look at this [cheatsheet](htt
 ### Language
 
 The package [`babel`](https://ctan.org/pkg/babel) is used for language support. With the standard being Englisch. Additionally the package [`csqotes`](https://ctan.org/pkg/csquotes) is imported, for correct qotes based on the primary language selected via `babel`.
+
+You can change the language associated with the document by changing this line right after the begin of the document:
+```tex
+\selectlanguage{english}
+```
+The possible arguments for this are `english` and `naustrian`.
 
 ### Code
 
@@ -85,6 +92,12 @@ The standard `graphicspath` is set to `./img/`. This can be changed with the
 command.
 
 ## Changelog
+
+### 0.2.0
+- add `\msetmid` command
+- fix wrong primary language set
+- add option to specify language for the document
+- make `\mset` robust
 
 ### 0.1.2
 
