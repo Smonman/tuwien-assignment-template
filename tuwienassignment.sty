@@ -219,7 +219,7 @@ shorten >=2pt
 %%% NEW COMMANDS
 % math set
 \makeatletter
-\newcommand{\mset}{\@ifstar{\@@mset}{\@mset}}
+\DeclareRobustCommand{\mset}{\@ifstar{\@@mset}{\@mset}}
 \newcommand{\@mset}[1]{\ensuremath{\left\{ \ifthenelse{\equal{#1}{}}{}{\: #1 \:} \right\}}}
 \newcommand{\@@mset}[1]{\ensuremath{\left\{ \: \ifthenelse{\equal{#1}{}}{\emptyset}{#1} \: \right\}}}
 \makeatother
