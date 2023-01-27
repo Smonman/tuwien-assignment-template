@@ -1,16 +1,16 @@
 %%% TUWIEN ASSIGNMENT TEMPLATE
 % Author: Simon Josef Kreuzpointner
-% Date: 09.12.2022
-% Version: 0.1.2
+% Date: 27.01.2023
+% Version: 0.2.0
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{tuwienassignment}[2022/12/01 inofficial TU Vienna assigment template]
+\ProvidesPackage{tuwienassignment}[2023/01/27 inofficial TU Vienna assigment template]
 
 % PACKAGES
 \RequirePackage[a4paper,top=3cm,bottom=2cm,left=2cm,right=2cm,headsep=1cm]{geometry} % layout
 \RequirePackage[utf8]{inputenc} % input encoding
 \RequirePackage[T1]{fontenc} % font encoding for umlaute
-\RequirePackage[english,naustrian]{babel} % language
+\RequirePackage[naustrian,english]{babel} % language
 \RequirePackage{csquotes} % enqote
 \RequirePackage{iflang} % conditional statements based on selected language
 \RequirePackage{ifthen} % for conditinal branching
@@ -219,10 +219,11 @@ shorten >=2pt
 %%% NEW COMMANDS
 % math set
 \makeatletter
-\newcommand{\mset}{\@ifstar{\@@mset}{\@mset}}
+\DeclareRobustCommand{\mset}{\@ifstar{\@@mset}{\@mset}}
 \newcommand{\@mset}[1]{\ensuremath{\left\{ \ifthenelse{\equal{#1}{}}{}{\: #1 \:} \right\}}}
 \newcommand{\@@mset}[1]{\ensuremath{\left\{ \: \ifthenelse{\equal{#1}{}}{\emptyset}{#1} \: \right\}}}
 \makeatother
+\newcommand{\msetmid}[2]{\ensuremath{\left\{ \: #1 \: \middle| \: #2 \: \right\}}}
 % math tuple
 \newcommand{\mtupel}[1]{\ensuremath{\left\langle \ifthenelse{\equal{#1}{}}{}{\: #1 \:} \right\rangle}}
 % logical true and false
