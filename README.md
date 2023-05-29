@@ -6,7 +6,7 @@ _This Latex template aims to streamline the writing of digital assignments._
 
 ## Why should I use this template?
 
-Writing assignments isn't necessarily a joyful activity. Out of a need to reduce workload this template was written. It's purpose is not to be an efficient lightweight template but rather a fully loaded, plug-and-play, out of the box template. It provides additional commands to help specificly with assignments. The idea was that one can start working using this template, without worring about packages to import or settings to change.
+Writing assignments isn't necessarily a joyful activity. Out of a need to reduce workload this template was written. Its purpose is not to be an efficient lightweight template but rather a fully loaded, plug-and-play, out of the box template. It provides additional commands to help specificly with assignments. The idea was that one can start working using this template, without worring about packages to import or settings to change.
 
 ## How do I use this template?
 
