@@ -50,10 +50,10 @@ The packages [`amsmath`](https://ctan.org/pkg/amsmath), `amssymb`, [`mathtools`]
 
 Moreover some math-related commands are changed or added:
 
-- `\abs` and `\norm` now scale with the content
+- `\abs{}` and `\norm{}` now scale with the content
 - `\mset{}` creates a simple set, with scaling braces and spacing
 - `\mset*{}` creates an empty set, with scaling braces and spacing and displays the empty set symbol if no elements are in the set
-- `\msetmid` creates a simple set with scaling braces and the scaling mid symbol
+- `\msetmid{}{}` creates a simple set with scaling braces and the scaling mid symbol
 - `\mtupel{}` creates a simple tupel, with scaling angled brackets and spacing
 - `conditions` is an environment to list mathematical conditions or explanations
 - `\ltrue` is an alias for verum
@@ -91,7 +91,24 @@ The standard `graphicspath` is set to `./img/`. This can be changed with the
 
 command.
 
+### Header
+
+The author, matrikelnumber and date can be ommited by setting them blank before the `\maketitel` command:
+```tex
+\author{}
+\matrikelnr{}
+\date{}
+
+...
+
+\maketitel
+```
+
 ## Changelog
+
+### 0.3.0
+- add `\msetmidsa` command, a standalone mid symbol for the `\mset{}` and `\mset*{}` commands
+- fix spacing error when no author is given
 
 ### 0.2.0
 - add `\msetmid` command
