@@ -137,6 +137,10 @@ The difference between \emph{starred} and \emph{non-starred} lies in the scaling
 \[\msetmid{a}{\frac{a}{2} > 5}\]
 This command automatically places a scaling mid symbol.
 
+\commandcmd{msetmidsa} produces the following:
+\[\mset{\msetmidsa}\]
+This command has to be used inside of \lstinline{\mset} or \lstinline{\mset*}, and creates a \emph{standalone} scaling mid symbol. This allows for multiple mid symbols in one set e.g.: \(\mset{\msetmidsa \msetmidsa}\)
+
 \commandcmd{mtupel} produces the following:
 \[\mtupel{1, 2, 3, 4}\]
 \[\mtupel{\frac{1}{2}, \frac{2}{3}}\]

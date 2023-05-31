@@ -1,10 +1,10 @@
 %%% TUWIEN ASSIGNMENT TEMPLATE
 % Author: Simon Josef Kreuzpointner
-% Date: 27.01.2023
-% Version: 0.2.0
+% Date: 31.05.2023
+% Version: 0.3.0
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{tuwienassignment}[2023/01/27 inofficial TU Vienna assigment template]
+\ProvidesPackage{tuwienassignment}[2023/05/31 inofficial TU Vienna assigment template]
 
 % PACKAGES
 \RequirePackage[a4paper,top=3cm,bottom=2cm,left=2cm,right=2cm,headsep=1cm]{geometry} % layout
@@ -57,35 +57,36 @@
 \graphicspath{{./img/}}
 
 %%% TITLE STYLE
+\newcommand{\authormatrikelnrspacing}{\ifthenelse{\equal{\@author}{}}{}{\quad}}
 % before title
-\pretitle{
-  \begin{raggedright}
-  \Huge
-}
-% after title
-\posttitle{
-  \newline
-  \end{raggedright}
-  \noindent\vrule height 2.5pt width \textwidth
-  \vskip .75em plus .25em minus .25em
-}
+\pretitle{%
+  \begin{raggedright}%
+    \Huge%
+    }%
+    % after title
+    \posttitle{%
+    \newline%
+  \end{raggedright}%
+  \noindent\vrule height 2.5pt width \textwidth%
+  \vskip .75em plus .25em minus .25em%
+}%
 % before author
 \preauthor{
   \begin{raggedright}
-  \itshape
-}
-% after author
-\postauthor{
-  \end{raggedright}
-  \@matrikelnr
-  \newline
-}
+    \itshape%
+    }%
+    % after author
+    \postauthor{%
+  \end{raggedright}%
+  \noindent\authormatrikelnrspacing\@matrikelnr%
+  \newline%
+}%
 % before date
 \predate{
   \begin{raggedright}
-}
-% after date
-\postdate{
+    }
+    % after date
+    \postdate{
   \end{raggedright}
 }
 
@@ -220,12 +221,13 @@ shorten >=2pt
 % math set
 \makeatletter
 \DeclareRobustCommand{\mset}{\@ifstar{\@@mset}{\@mset}}
-\newcommand{\@mset}[1]{\ensuremath{\left\{ \ifthenelse{\equal{#1}{}}{}{\: #1 \:} \right\}}}
-\newcommand{\@@mset}[1]{\ensuremath{\left\{ \: \ifthenelse{\equal{#1}{}}{\emptyset}{#1} \: \right\}}}
+\newcommand{\@mset}[1]{\ensuremath{\left\{ \ifthenelse{\equal{#1}{}}{}{\, #1 \,} \right\}}}
+\newcommand{\@@mset}[1]{\ensuremath{\left\{ \, \ifthenelse{\equal{#1}{}}{\emptyset}{#1} \, \right\}}}
 \makeatother
-\newcommand{\msetmid}[2]{\ensuremath{\left\{ \: #1 \: \middle| \: #2 \: \right\}}}
+\newcommand{\msetmid}[2]{\ensuremath{\mset{ #1 \msetmidsa #2 }}}
+\newcommand{\msetmidsa}{\ensuremath{\, \middle| \,}}
 % math tuple
-\newcommand{\mtupel}[1]{\ensuremath{\left\langle \ifthenelse{\equal{#1}{}}{}{\: #1 \:} \right\rangle}}
+\newcommand{\mtupel}[1]{\ensuremath{\left\langle \ifthenelse{\equal{#1}{}}{}{\, #1 \,} \right\rangle}}
 % logical true and false
 \newcommand{\ltrue}{\top}
 \newcommand{\lfalse}{\bot}
@@ -242,7 +244,7 @@ shorten >=2pt
 %%% CONDITIONS
 \newenvironment{conditions}
 {\renewcommand{\arraystretch}{1.25}\par\noindent
-\tabularx{\columnwidth}{>{$}l<{$} @{}>{\: $}c<{$ \:}@{} >{\raggedright\arraybackslash}X}}
+\tabularx{\columnwidth}{>{$}l<{$} @{}>{\, $}c<{$ \,}@{} >{\raggedright\arraybackslash}X}}
 {\endtabularx\par\vspace{\belowdisplayskip}}
 
 %%% EXERCISE AND SOLUTRION
