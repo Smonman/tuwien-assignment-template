@@ -54,6 +54,7 @@ Moreover some math-related commands are changed or added:
 - `\mset{}` creates a simple set, with scaling braces and spacing
 - `\mset*{}` creates an empty set, with scaling braces and spacing and displays the empty set symbol if no elements are in the set
 - `\msetmid{}{}` creates a simple set with scaling braces and the scaling mid symbol
+- `\msetmidsa` creates a standalone mid symbol to be used inside of `\mset{}`, `\mset*{}` or `\msetmid{}{}`
 - `\mtupel{}` creates a simple tupel, with scaling angled brackets and spacing
 - `conditions` is an environment to list mathematical conditions or explanations
 - `\ltrue` is an alias for verum
