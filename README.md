@@ -94,7 +94,7 @@ command.
 
 ### Header
 
-The author, matrikelnumber and date can be ommited by setting them blank before the `\maketitel` command:
+The author, matrikelnumber and date can be ommited by setting them blank before the `\maketitle` command:
 ```tex
 \author{}
 \matrikelnr{}
@@ -102,7 +102,7 @@ The author, matrikelnumber and date can be ommited by setting them blank before 
 
 ...
 
-\maketitel
+\maketitle
 ```
 
 ## Changelog
