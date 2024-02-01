@@ -1,10 +1,10 @@
 %%% TUWIEN ASSIGNMENT TEMPLATE
 % Author: Simon Josef Kreuzpointner
-% Date: 31.05.2023
-% Version: 0.3.0
+% Date: 01.02.2024
+% Version: 0.4.0
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{tuwienassignment}[2023/05/31 inofficial TU Vienna assigment template]
+\ProvidesPackage{tuwienassignment}[2024/02/01 inofficial TU Vienna assigment template]
 
 % PACKAGES
 \RequirePackage[a4paper,top=3cm,bottom=2cm,left=2cm,right=2cm,headsep=1cm]{geometry} % layout
@@ -22,13 +22,16 @@
 \RequirePackage{mathtools} % enhances amsmath
 \RequirePackage{amsthm} % 
 \RequirePackage{microtype} % improves the spacing between words and letters
-\RequirePackage[inline]{enumitem} % horizontal lists
+\RequirePackage{enumitem} % horizontal lists
 \RequirePackage{graphicx} % graphics, images
 \RequirePackage{array} % extension of array and tabular environments
 \RequirePackage{xcolor} % work with colors
 \RequirePackage{fp} % fixed point arithmetic
 \RequirePackage{booktabs} % better table design
 \RequirePackage{tabularx} % better table layout
+\RequirePackage{xltabular} % tabularx tables over multiple pages
+\RequirePackage{nicematrix} % better matrices
+\RequirePackage{multirow} % allow multirow cells
 \RequirePackage{makecell} % table cell configuration
 \RequirePackage{listings} % code listing
 \RequirePackage{pgfkeys} % pgf keys
@@ -107,6 +110,16 @@
 
 %%% ITEMIZE STYLE
 \renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$}
+
+%%% ENUMITEM
+\newlist{tabitemize}{itemize}{1}
+\setlist[tabitemize,1]{%
+  label=\textbullet,
+  left=0pt,
+  nosep,
+  before={\begin{minipage}[t]{\linewidth}},
+        after ={\end{minipage}}
+}
 
 %%% LSTLISTING STYLE
 \lstdefinestyle{lststandardstyle}{
@@ -213,10 +226,6 @@ shorten >=2pt
 \renewcommand{\theadalign}{cl}
 \renewcommand{\cellalign}{tl}
 
-%%% TABLE ROWS
-% table row spacing
-\renewcommand{\arraystretch}{1.5}
-
 %%% NEW COMMANDS
 % math set
 \makeatletter
@@ -240,14 +249,22 @@ shorten >=2pt
 \let\oldnorm\norm
 \def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
 \makeatother
+% mappliesto
+\newcommand{\mappliesto}{\ensuremath{,\quad}}
+% mdefinedas
+\newcommand{\mdefinedas}{\ensuremath{:=}}
 
 %%% CONDITIONS
-\newenvironment{conditions}
-{\renewcommand{\arraystretch}{1.25}\par\noindent
-\tabularx{\columnwidth}{>{$}l<{$} @{}>{\, $}c<{$ \,}@{} >{\raggedright\arraybackslash}X}}
-{\endtabularx\par\vspace{\belowdisplayskip}}
+\newenvironment{conditions}[1][\dots]{%
+\renewcommand{\arraystretch}{1.25}\par\noindent%
+\setlength\tabcolsep{1.5pt}%
+\newcommand{\sep}{#1}%
+\tabularx{\linewidth}{>{\(}r<{\)}>{\(}c<{\)}l}%
+}{%
+\endtabularx\par\vspace{\belowdisplayskip}
+}
 
-%%% EXERCISE AND SOLUTRION
+%%% EXERCISE AND SOLUTION
 % counters
 \newcounter{exercisecounter}
 \newcounter{solutioncounter}

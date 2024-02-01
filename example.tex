@@ -103,7 +103,6 @@ The numberformat can also be changed by calling the macro \lstinline|\renewcomma
   \end{solution}
 \end{exercise}
 
-
 \section{Math}
 \subsection{Abs and Norm}
 \commandscmd{abs}{norm}\footnote{see \url{https://tex.stackexchange.com/a/43009}} produce the following:
@@ -146,17 +145,36 @@ This command has to be used inside of \lstinline{\mset} or \lstinline{\mset*}, a
 \[\mtupel{\frac{1}{2}, \frac{2}{3}}\]
 \[\mtupel{}\]
 
+\subsection{Other}
+
+\commandcmd{mappliesto} produces the following with spacing:
+\[\mappliesto\]
+which can be used e.g. in the following context:
+\[\mathbf{n}(u) = \frac{\sum_{i = 0}^n w_i \mathbf{d}_i N_i^k(u)}{\sum_{i = 0}^n w_i N_i^k(u)} \mappliesto u \in \left[u_0, u_{n + l}\right) \subset \mathbb{R}\]
+
+\commandcmd{mdefinedas} produces the following:
+\[\mdefinedas\]
+which can be used e.g. in the following context:
+\[\mathbf{b}_i^r \mdefinedas (1 - t) \cdot \mathbf{b}_i^{r - 1} + t \cdot \mathbf{b}_{i + 1}^{r - 1}\]
+
 \subsection{Conditions}
 \environmentcmd{conditions}\footnote{see \url{https://tex.stackexchange.com/a/95842}} can be used for the following:
 \\
 Boltzmann distribution: state occupation probability of a thermodynamical system within fixed temperature \(T\): \[p(x) = \alpha \cdot e^{-\frac{E(x)}{k \cdot T}}\] where:
 \begin{conditions}
-  x & \dots & state \\
-  \alpha & \dots & degeneracy (= number of states \(x'\) with the same energy as \(x\)) \\
-  E(x) & \dots & energy \\
-  k & \dots & Bolzmann constant
+  x       & \sep & state \\
+  \alpha  & \sep & degeneracy (= number of states \(x'\) with the same energy as \(x\)) \\
+  E(x)    & \sep & energy \\
+  k       & \sep & Bolzmann constant
 \end{conditions}
-It is possible to have different symbols instead of the dots.
+It is possible to have different symbols instead of the dots:
+
+\begin{conditions}[=]
+  x       & \sep & state \\
+  \alpha  & \sep & degeneracy (= number of states \(x'\) with the same energy as \(x\)) \\
+  E(x)    & \sep & energy \\
+  k       & \sep & Bolzmann constant
+\end{conditions}
 
 \section{Logic}
 \subsection{Verum and Falsum}
@@ -164,6 +182,27 @@ It is possible to have different symbols instead of the dots.
 \[\ltrue\]
 \commandcmd{lfalse} produces the following:
 \[\lfalse\]
+
+\section{Tables}
+\subsection{Itemize in Tables}
+\environmentcmd{tabitemize} creates an itemize environment inside of an minipage, so it can be placed in a table cell:
+
+\begin{table}[!h]
+  \centering
+  \begin{tabularx}{0.5\linewidth}{Y}
+    \toprule
+    Header            \\
+    \midrule
+    \begin{tabitemize}
+      \item item 1
+      \item item 2
+      \item item 3
+    \end{tabitemize} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+Please note, that this only works in \emph{tabularx} columns.
 
 \section{lstlistings}
 
