@@ -151,12 +151,19 @@ This command has to be used inside of \lstinline{\mset} or \lstinline{\mset*}, a
 \\
 Boltzmann distribution: state occupation probability of a thermodynamical system within fixed temperature \(T\): \[p(x) = \alpha \cdot e^{-\frac{E(x)}{k \cdot T}}\] where:
 \begin{conditions}
-  x & \dots & state \\
-  \alpha & \dots & degeneracy (= number of states \(x'\) with the same energy as \(x\)) \\
-  E(x) & \dots & energy \\
-  k & \dots & Bolzmann constant
+  x       & \sep & state \\
+  \alpha  & \sep & degeneracy (= number of states \(x'\) with the same energy as \(x\)) \\
+  E(x)    & \sep & energy \\
+  k       & \sep & Bolzmann constant
 \end{conditions}
-It is possible to have different symbols instead of the dots.
+It is possible to have different symbols instead of the dots:
+
+\begin{conditions}[=]
+  x       & \sep & state \\
+  \alpha  & \sep & degeneracy (= number of states \(x'\) with the same energy as \(x\)) \\
+  E(x)    & \sep & energy \\
+  k       & \sep & Bolzmann constant
+\end{conditions}
 
 \section{Logic}
 \subsection{Verum and Falsum}

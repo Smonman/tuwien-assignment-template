@@ -242,10 +242,14 @@ shorten >=2pt
 \makeatother
 
 %%% CONDITIONS
-\newenvironment{conditions}
-{\renewcommand{\arraystretch}{1.25}\par\noindent
-\tabularx{\columnwidth}{>{$}l<{$} @{}>{\, $}c<{$ \,}@{} >{\raggedright\arraybackslash}X}}
-{\endtabularx\par\vspace{\belowdisplayskip}}
+\newenvironment{conditions}[1][\dots]{%
+\renewcommand{\arraystretch}{1.25}\par\noindent%
+\setlength\tabcolsep{1.5pt}%
+\newcommand{\sep}{#1}%
+\tabularx{\linewidth}{>{\(}r<{\)}>{\(}c<{\)}l}%
+}{%
+\endtabularx\par\vspace{\belowdisplayskip}
+}
 
 %%% EXERCISE AND SOLUTRION
 % counters
