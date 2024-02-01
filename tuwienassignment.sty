@@ -111,6 +111,16 @@
 %%% ITEMIZE STYLE
 \renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$}
 
+%%% ENUMITEM
+\newlist{tabitemize}{itemize}{1}
+\setlist[tabitemize,1]{%
+  label=\textbullet,
+  left=0pt,
+  nosep,
+  before={\begin{minipage}[t]{\linewidth}},
+        after ={\end{minipage}}
+}
+
 %%% LSTLISTING STYLE
 \lstdefinestyle{lststandardstyle}{
   backgroundcolor=\color{codelightgray},

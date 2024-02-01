@@ -103,7 +103,6 @@ The numberformat can also be changed by calling the macro \lstinline|\renewcomma
   \end{solution}
 \end{exercise}
 
-
 \section{Math}
 \subsection{Abs and Norm}
 \commandscmd{abs}{norm}\footnote{see \url{https://tex.stackexchange.com/a/43009}} produce the following:
@@ -183,6 +182,27 @@ It is possible to have different symbols instead of the dots:
 \[\ltrue\]
 \commandcmd{lfalse} produces the following:
 \[\lfalse\]
+
+\section{Tables}
+\subsection{Itemize in Tables}
+\environmentcmd{tabitemize} creates an itemize environment inside of an minipage, so it can be placed in a table cell:
+
+\begin{table}[!h]
+  \centering
+  \begin{tabularx}{0.5\linewidth}{Y}
+    \toprule
+    Header            \\
+    \midrule
+    \begin{tabitemize}
+      \item item 1
+      \item item 2
+      \item item 3
+    \end{tabitemize} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+Please note, that this only works in \emph{tabularx} columns.
 
 \section{lstlistings}
 
