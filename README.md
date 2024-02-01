@@ -56,6 +56,8 @@ Moreover some math-related commands are changed or added:
 - `\msetmid{}{}` creates a simple set with scaling braces and the scaling mid symbol
 - `\msetmidsa` creates a standalone mid symbol to be used inside of `\mset{}`, `\mset*{}` or `\msetmid{}{}`
 - `\mtupel{}` creates a simple tupel, with scaling angled brackets and spacing
+- `\mappliesto` creates a comma with spacing
+- `\mdefinedas` creates a colon with an equal sign
 - `conditions` is an environment to list mathematical conditions or explanations
 - `\ltrue` is an alias for verum
 - `\lfalse` is an alias for falsum
@@ -106,6 +108,14 @@ The author, matrikelnumber and date can be ommited by setting them blank before 
 ```
 
 ## Changelog
+
+### 0.4.0
+- fix `conditions` being to wide
+- add optional argument to `conditions` as the seperator, usable with `\sep`
+- add packages `nicematrix`, `xltabular` and `multirow`
+- new math commands `mappliesto` and `mdefinedas`
+- remove array stretch
+- new itemize environment for tables `tabitemize`
 
 ### 0.3.0
 - add `\msetmidsa` command, a standalone mid symbol for the `\mset{}` and `\mset*{}` commands
