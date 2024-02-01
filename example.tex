@@ -146,6 +146,18 @@ This command has to be used inside of \lstinline{\mset} or \lstinline{\mset*}, a
 \[\mtupel{\frac{1}{2}, \frac{2}{3}}\]
 \[\mtupel{}\]
 
+\subsection{Other}
+
+\commandcmd{mappliesto} produces the following with spacing:
+\[\mappliesto\]
+which can be used e.g. in the following context:
+\[\mathbf{n}(u) = \frac{\sum_{i = 0}^n w_i \mathbf{d}_i N_i^k(u)}{\sum_{i = 0}^n w_i N_i^k(u)} \mappliesto u \in \left[u_0, u_{n + l}\right) \subset \mathbb{R}\]
+
+\commandcmd{mdefinedas} produces the following:
+\[\mdefinedas\]
+which can be used e.g. in the following context:
+\[\mathbf{b}_i^r \mdefinedas (1 - t) \cdot \mathbf{b}_i^{r - 1} + t \cdot \mathbf{b}_{i + 1}^{r - 1}\]
+
 \subsection{Conditions}
 \environmentcmd{conditions}\footnote{see \url{https://tex.stackexchange.com/a/95842}} can be used for the following:
 \\
