@@ -105,45 +105,87 @@ The numberformat can also be changed by calling the macro \lstinline|\renewcomma
 
 \section{Math}
 \subsection{Abs and Norm}
-\commandscmd{abs}{norm}\footnote{see \url{https://tex.stackexchange.com/a/43009}} produce the following:
-\begin{table}[h!t]
-  \centering
-  \begin{tabular}{ccc}
-    \toprule
-    \thead{command} & \thead{non-starred}       & \thead{starred}            \\
-    \midrule
-    \verb|\abs|     & \(\abs{\frac{1}{2}x^2}\)  & \(\abs*{\frac{1}{2}x^2}\)  \\
-    \verb|\norm|    & \(\norm{\frac{1}{2}x^2}\) & \(\norm*{\frac{1}{2}x^2}\) \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+\commandcmd{abs} produces the following:
+\begin{itemize}
+  \item \emph{non-starred}
+        \[\abs{a}\]
+        \[\abs{\frac{a}{2}}\]
+  \item \emph{starred}
+        \[\abs*{a}\]
+        \[\abs*{\frac{a}{2}}\]
+\end{itemize}
 
-The difference between \emph{starred} and \emph{non-starred} lies in the scaling of the bars.
+\commandcmd{norm} produces the following:
+\begin{itemize}
+  \item \emph{non-starred}
+        \[\norm{a}\]
+        \[\norm{\frac{a}{2}}\]
+  \item \emph{starred}
+        \[\norm*{a}\]
+        \[\norm*{\frac{a}{2}}\]
+\end{itemize}
+
+\subsection{Ceil and Floor}
+\commandcmd{ceil} produces the following:
+\begin{itemize}
+  \item \emph{non-starred}
+        \[\ceil{a}\]
+        \[\ceil{\frac{a}{2}}\]
+  \item \emph{starred}
+        \[\ceil*{a}\]
+        \[\ceil*{\frac{a}{2}}\]
+\end{itemize}
+
+\commandcmd{floor} produces the following:
+\begin{itemize}
+  \item \emph{non-starred}
+        \[\floor{a}\]
+        \[\floor{\frac{a}{2}}\]
+  \item \emph{starred}
+        \[\floor*{a}\]
+        \[\floor*{\frac{a}{2}}\]
+\end{itemize}
 
 \subsection{Sets and Tupels}
 \commandcmd{mset} produces the following:
-\[\mset{1, 2, 3, 4}\]
-\[\mset{a \mid \frac{a}{2} > 5}\]
-\[\mset{}\]
-\[\mset{\mset{a}}\]
-
-\commandcmd{mset*} produces the following:
-\[\mset*{1, 2, 3, 4}\]
-\[\mset*{a \mid \frac{a}{2} > 5}\]
-\[\mset*{}\]
+\begin{itemize}
+  \item \emph{non-starred}:
+        \[\mset{1, 2, 3, 4}\]
+        \[\mset{a \mid \frac{a}{2} > 5}\]
+        \[\mset{}\]
+        \[\mset{\mset{a}}\]
+  \item \emph{starred}:
+        \[\mset*{1, 2, 3, 4}\]
+        \[\mset*{a \mid \frac{a}{2} > 5}\]
+        \[\mset*{}\]
+        \[\mset*{\mset*{a}}\]
+\end{itemize}
 
 \commandcmd{msetmid} produces the following:
-\[\msetmid{a}{\frac{a}{2} > 5}\]
-This command automatically places a scaling mid symbol.
-
-\commandcmd{msetmidsa} produces the following:
-\[\mset{\msetmidsa}\]
-This command has to be used inside of \lstinline{\mset} or \lstinline{\mset*}, and creates a \emph{standalone} scaling mid symbol. This allows for multiple mid symbols in one set e.g.: \(\mset{\msetmidsa \msetmidsa}\)
+\begin{itemize}
+  \item \emph{non-starred}:
+        \[\msetmid{x}{x > 0}\]
+        \[\msetmid{\frac{1}{x}}{x > 0}\]
+        \[\msetmid{}{}\]
+        \[\msetmid{x}{x \in \mset{a}}\]
+  \item \emph{starred}:
+        \[\msetmid*{x}{x > 0}\]
+        \[\msetmid*{\frac{1}{x}}{x > 0}\]
+        \[\msetmid*{}{}\]
+        \[\msetmid*{x}{x \in \mset{a}}\]
+\end{itemize}
 
 \commandcmd{mtupel} produces the following:
-\[\mtupel{1, 2, 3, 4}\]
-\[\mtupel{\frac{1}{2}, \frac{2}{3}}\]
-\[\mtupel{}\]
+\begin{itemize}
+  \item \emph{non-starred}:
+        \[\mtupel{1, 2, 3, 4}\]
+        \[\mtupel{\frac{1}{2}, \frac{2}{3}}\]
+        \[\mtupel{}\]
+  \item \emph{starred}:
+        \[\mtupel*{1, 2, 3, 4}\]
+        \[\mtupel*{\frac{1}{2}, \frac{2}{3}}\]
+        \[\mtupel*{}\]
+\end{itemize}
 
 \subsection{Other}
 
@@ -162,18 +204,18 @@ which can be used e.g. in the following context:
 \\
 Boltzmann distribution: state occupation probability of a thermodynamical system within fixed temperature \(T\): \[p(x) = \alpha \cdot e^{-\frac{E(x)}{k \cdot T}}\] where:
 \begin{conditions}
-  x       & \sep & state \\
-  \alpha  & \sep & degeneracy (= number of states \(x'\) with the same energy as \(x\)) \\
-  E(x)    & \sep & energy \\
-  k       & \sep & Bolzmann constant
+  x      & \sep & state                                                                \\
+  \alpha & \sep & degeneracy (= number of states \(x'\) with the same energy as \(x\)) \\
+  E(x)   & \sep & energy                                                               \\
+  k      & \sep & Bolzmann constant
 \end{conditions}
 It is possible to have different symbols instead of the dots:
 
 \begin{conditions}[=]
-  x       & \sep & state \\
-  \alpha  & \sep & degeneracy (= number of states \(x'\) with the same energy as \(x\)) \\
-  E(x)    & \sep & energy \\
-  k       & \sep & Bolzmann constant
+  x      & \sep & state                                                                \\
+  \alpha & \sep & degeneracy (= number of states \(x'\) with the same energy as \(x\)) \\
+  E(x)   & \sep & energy                                                               \\
+  k      & \sep & Bolzmann constant
 \end{conditions}
 
 \section{Logic}

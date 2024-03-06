@@ -228,31 +228,27 @@ shorten >=2pt
 
 %%% NEW COMMANDS
 % math set
+\DeclarePairedDelimiter\mset{\lbrace}{\rbrace}%
 \makeatletter
-\DeclareRobustCommand{\mset}{\@ifstar{\@@mset}{\@mset}}
-\newcommand{\@mset}[1]{\ensuremath{\left\{ \ifthenelse{\equal{#1}{}}{}{\, #1 \,} \right\}}}
-\newcommand{\@@mset}[1]{\ensuremath{\left\{ \, \ifthenelse{\equal{#1}{}}{\emptyset}{#1} \, \right\}}}
+\DeclareRobustCommand{\msetmid}{\@ifstar{\@msetmid}{\@@msetmid}}
+\newcommand{\@msetmid}[2]{\ensuremath{\mset*{#1 \mid #2}}}
+\newcommand{\@@msetmid}[2]{\ensuremath{\mset{#1 \mid #2}}}
 \makeatother
-\newcommand{\msetmid}[2]{\ensuremath{\mset{ #1 \msetmidsa #2 }}}
-\newcommand{\msetmidsa}{\ensuremath{\, \middle| \,}}
 % math tuple
-\newcommand{\mtupel}[1]{\ensuremath{\left\langle \ifthenelse{\equal{#1}{}}{}{\, #1 \,} \right\rangle}}
+\DeclarePairedDelimiter\mtupel{\langle}{\rangle}%
 % logical true and false
 \newcommand{\ltrue}{\top}
 \newcommand{\lfalse}{\bot}
 % abs and norm
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
-\makeatletter
-\let\oldabs\abs
-\def\abs{\@ifstar{\oldabs}{\oldabs*}}
-\let\oldnorm\norm
-\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
-\makeatother
+% ceil and floor
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}%
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}%
 % mappliesto
-\newcommand{\mappliesto}{\ensuremath{,\quad}}
+\DeclareMathOperator{\mappliesto}{,\quad}
 % mdefinedas
-\newcommand{\mdefinedas}{\ensuremath{:=}}
+\DeclareMathOperator{\mdefinedas}{\coloneqq}
 
 %%% CONDITIONS
 \newenvironment{conditions}[1][\dots]{%
