@@ -1,10 +1,10 @@
 %%% TUWIEN ASSIGNMENT TEMPLATE
 % Author: Simon Josef Kreuzpointner
-% Date: 01.02.2024
-% Version: 0.4.0
+% Date: 07.03.2024
+% Version: 0.5.0
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{tuwienassignment}[2024/02/01 inofficial TU Vienna assigment template]
+\ProvidesPackage{tuwienassignment}[2024/03/07 inofficial TU Vienna assigment template]
 
 % PACKAGES
 \RequirePackage[a4paper,top=3cm,bottom=2cm,left=2cm,right=2cm,headsep=1cm]{geometry} % layout
@@ -230,15 +230,15 @@ shorten >=2pt
 % math set
 \DeclarePairedDelimiter\mset{\lbrace}{\rbrace}%
 \makeatletter
-\DeclareRobustCommand{\msetmid}{\@ifstar{\@msetmid}{\@@msetmid}}
-\newcommand{\@msetmid}[2]{\ensuremath{\mset*{#1 \mid #2}}}
-\newcommand{\@@msetmid}[2]{\ensuremath{\mset{#1 \mid #2}}}
+\DeclareRobustCommand{\msetmid}{\@ifstar{\@msetmid}{\@@msetmid}}%
+\newcommand{\@msetmid}[2]{\ensuremath{\mset*{#1 \mid #2}}}%
+\newcommand{\@@msetmid}[2]{\ensuremath{\mset{#1 \mid #2}}}%
 \makeatother
 % math tuple
 \DeclarePairedDelimiter\mtupel{\langle}{\rangle}%
 % logical true and false
-\newcommand{\ltrue}{\top}
-\newcommand{\lfalse}{\bot}
+\newcommand{\ltrue}{\top}%
+\newcommand{\lfalse}{\bot}%
 % abs and norm
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
@@ -246,9 +246,9 @@ shorten >=2pt
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}%
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}%
 % appliesto
-\DeclareMathOperator{\appliesto}{,\quad}
+\DeclareMathOperator{\appliesto}{,\quad}%
 % definedas
-\DeclareMathOperator{\definedas}{\coloneqq}
+\DeclareMathOperator{\definedas}{\coloneqq}%
 
 %%% CONDITIONS
 \newenvironment{conditions}[1][\dots]{%
