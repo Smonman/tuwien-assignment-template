@@ -1,10 +1,10 @@
 %%% TUWIEN ASSIGNMENT TEMPLATE
 % Author: Simon Josef Kreuzpointner
-% Date: 01.02.2024
-% Version: 0.4.0
+% Date: 07.03.2024
+% Version: 0.5.0
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{tuwienassignment}[2024/02/01 inofficial TU Vienna assigment template]
+\ProvidesPackage{tuwienassignment}[2024/03/07 inofficial TU Vienna assigment template]
 
 % PACKAGES
 \RequirePackage[a4paper,top=3cm,bottom=2cm,left=2cm,right=2cm,headsep=1cm]{geometry} % layout
@@ -21,6 +21,7 @@
 \RequirePackage{amssymb} % math symbols
 \RequirePackage{mathtools} % enhances amsmath
 \RequirePackage{amsthm} % 
+\RequirePackage{siunitx} % SI units
 \RequirePackage{microtype} % improves the spacing between words and letters
 \RequirePackage{enumitem} % horizontal lists
 \RequirePackage{graphicx} % graphics, images
@@ -228,31 +229,27 @@ shorten >=2pt
 
 %%% NEW COMMANDS
 % math set
+\DeclarePairedDelimiter\mset{\lbrace}{\rbrace}%
 \makeatletter
-\DeclareRobustCommand{\mset}{\@ifstar{\@@mset}{\@mset}}
-\newcommand{\@mset}[1]{\ensuremath{\left\{ \ifthenelse{\equal{#1}{}}{}{\, #1 \,} \right\}}}
-\newcommand{\@@mset}[1]{\ensuremath{\left\{ \, \ifthenelse{\equal{#1}{}}{\emptyset}{#1} \, \right\}}}
+\DeclareRobustCommand{\msetmid}{\@ifstar{\@msetmid}{\@@msetmid}}%
+\newcommand{\@msetmid}[2]{\ensuremath{\mset*{#1 \mid #2}}}%
+\newcommand{\@@msetmid}[2]{\ensuremath{\mset{#1 \mid #2}}}%
 \makeatother
-\newcommand{\msetmid}[2]{\ensuremath{\mset{ #1 \msetmidsa #2 }}}
-\newcommand{\msetmidsa}{\ensuremath{\, \middle| \,}}
 % math tuple
-\newcommand{\mtupel}[1]{\ensuremath{\left\langle \ifthenelse{\equal{#1}{}}{}{\, #1 \,} \right\rangle}}
+\DeclarePairedDelimiter\mtupel{\langle}{\rangle}%
 % logical true and false
-\newcommand{\ltrue}{\top}
-\newcommand{\lfalse}{\bot}
+\newcommand{\ltrue}{\top}%
+\newcommand{\lfalse}{\bot}%
 % abs and norm
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
-\makeatletter
-\let\oldabs\abs
-\def\abs{\@ifstar{\oldabs}{\oldabs*}}
-\let\oldnorm\norm
-\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
-\makeatother
-% mappliesto
-\newcommand{\mappliesto}{\ensuremath{,\quad}}
-% mdefinedas
-\newcommand{\mdefinedas}{\ensuremath{:=}}
+% ceil and floor
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}%
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}%
+% appliesto
+\DeclareMathOperator{\appliesto}{,\quad}%
+% definedas
+\DeclareMathOperator{\definedas}{\coloneqq}%
 
 %%% CONDITIONS
 \newenvironment{conditions}[1][\dots]{%
