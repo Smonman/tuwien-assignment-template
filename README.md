@@ -70,6 +70,7 @@ If a specific solution counter should be set to a specific value, this can be do
 ```
 
 macro, where `x` is the new starting number for the counter.
+
 > **Note**: that the following solutions will also be affected.
 
 If the numbering style of the solutions within an `exercise` environment should be changed, this currently cannot be done via keys, but has to be done _manually_ via the command:
@@ -98,7 +99,7 @@ Moreover some math-related commands are changed or added:
 | `\appliesto` | no | creates a comma with spacing |
 | `\definedas` | no | creates a colon with an equal sign |
 | `\ltrue` | no | alias for verum |
-| `lfalse` | no | alias for falsum |
+| `\lfalse` | no | alias for falsum |
 
 | environment | description |
 | --- | --- |
@@ -176,6 +177,7 @@ The author, matrikelnumber and date can be ommited by setting them blank before 
 - add `siunix` package
 
 ### 0.4.0
+
 - fix `conditions` being to wide
 - add optional argument to `conditions` as the seperator, usable with `\sep`
 - add packages `nicematrix`, `xltabular` and `multirow`
@@ -184,10 +186,12 @@ The author, matrikelnumber and date can be ommited by setting them blank before 
 - new itemize environment for tables `tabitemize`
 
 ### 0.3.0
+
 - add `\msetmidsa` command, a standalone mid symbol for the `\mset{}` and `\mset*{}` commands
 - fix spacing error when no author is given
 
 ### 0.2.0
+
 - add `\msetmid` command
 - fix wrong primary language set
 - add option to specify language for the document
