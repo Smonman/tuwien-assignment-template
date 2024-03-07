@@ -232,8 +232,8 @@ shorten >=2pt
 \DeclarePairedDelimiter\mset{\lbrace}{\rbrace}%
 \makeatletter
 \DeclareRobustCommand{\msetmid}{\@ifstar{\@msetmid}{\@@msetmid}}%
-\newcommand{\@msetmid}[2]{\ensuremath{\mset*{#1 \mid #2}}}%
-\newcommand{\@@msetmid}[2]{\ensuremath{\mset{#1 \mid #2}}}%
+\newcommand{\@msetmid}[2]{\ensuremath{\mset*{\, #1 \mathrel{\big|} #2 \,}}}%
+\newcommand{\@@msetmid}[2]{\ensuremath{\mset{\, #1 \mid #2 \,}}}%
 \makeatother
 % math tuple
 \DeclarePairedDelimiter\mtupel{\langle}{\rangle}%
