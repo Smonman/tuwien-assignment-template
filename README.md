@@ -154,6 +154,11 @@ The author, matrikelnumber and date can be ommited by setting them blank before 
 
 ## Changelog
 
+### 0.5.1
+
+- adjust spacing in `\msetmid`
+- `\msetmid*` scales mid
+
 ### 0.5.0
 
 - refactor commands:
