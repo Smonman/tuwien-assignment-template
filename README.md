@@ -16,6 +16,42 @@ Download the latest version of this template [here](https://github.com/Smonman/t
 
 This template comes with a sleek design that is kept closely to the originial Latex article style. It also provides environments for exercises and solutions. Which are conveniently numbered.
 
+This template loads a bunch of other packages:
+
+- `geometry`
+- `inputenc`
+- `fontenc`
+- `babel`
+- `csquotes`
+- `iflang`
+- `ifthen`
+- `parskip`
+- `titling`
+- `fancyhdr`
+- `amsmath`
+- `amssymb`
+- `mathtools`
+- `amsthm`
+- `siunix`
+- `microtype`
+- `enumitem`
+- `graphicx`
+- `array`
+- `xcolor`
+- `fp`
+- `booktabs`
+- `tabularx`
+- `xltabular`
+- `nicematrix`
+- `multirow`
+- `makecell`
+- `listings`
+- `pgfkeys`
+- `tikz`
+- `varwidth`
+- `float`
+- `hyperref`
+
 ### Exercises and Solutions
 
 `exercise` is an environment for the exercises, including the solutions. Exercises are numbered within a `section`. The idea is, that each section represents a singe exercise sheet. Inside of this `exercise` environment can multiple `solution` environments be declared. These are numbered within the parent exercise environment.
@@ -50,17 +86,23 @@ The packages [`amsmath`](https://ctan.org/pkg/amsmath), `amssymb`, [`mathtools`]
 
 Moreover some math-related commands are changed or added:
 
-- `\abs{}` and `\norm{}` now scale with the content
-- `\mset{}` creates a simple set, with scaling braces and spacing
-- `\mset*{}` creates an empty set, with scaling braces and spacing and displays the empty set symbol if no elements are in the set
-- `\msetmid{}{}` creates a simple set with scaling braces and the scaling mid symbol
-- `\msetmidsa` creates a standalone mid symbol to be used inside of `\mset{}`, `\mset*{}` or `\msetmid{}{}`
-- `\mtupel{}` creates a simple tupel, with scaling angled brackets and spacing
-- `\mappliesto` creates a comma with spacing
-- `\mdefinedas` creates a colon with an equal sign
-- `conditions` is an environment to list mathematical conditions or explanations
-- `\ltrue` is an alias for verum
-- `\lfalse` is an alias for falsum
+| command | has starred version | description |
+| --- | --- | --- |
+| `\ceil{}` | yes | |
+| `\floor{}` | yes | |
+| `\abs{}` | yes | |
+| `\norm{}` | yes | |
+| `\mset{}` | yes | creates a simple set |
+| `\msetmid{}{}` | yes | creates a simple set with a mid symbol |
+| `\mtupel{}` | yes | creates a simple tupel |
+| `\appliesto` | no | creates a comma with spacing |
+| `\definedas` | no | creates a colon with an equal sign |
+| `\ltrue` | no | alias for verum |
+| `lfalse` | no | alias for falsum |
+
+| environment | description |
+| --- | --- |
+| `conditions` | is an environment to list mathematical conditions or explanations |
 
 For more details regarding Latex in general take a look at this [cheatsheet](https://de.overleaf.com/latex/templates/a-quick-guide-to-latex/fghqpfgnxggz).
 
@@ -69,9 +111,11 @@ For more details regarding Latex in general take a look at this [cheatsheet](htt
 The package [`babel`](https://ctan.org/pkg/babel) is used for language support. With the standard being Englisch. Additionally the package [`csquotes`](https://ctan.org/pkg/csquotes) is imported, for correct quotes based on the primary language selected via `babel`.
 
 You can change the language associated with the document by changing this line right after the begin of the document:
+
 ```tex
 \selectlanguage{english}
 ```
+
 The possible arguments for this are `english` and `naustrian`.
 
 ### Code
@@ -108,6 +152,28 @@ The author, matrikelnumber and date can be ommited by setting them blank before 
 ```
 
 ## Changelog
+
+### 0.5.0
+
+- refactor commands:
+  - `abs`
+  - `norm`
+  - `mset`
+  - `msetmid`
+  - `mtupel`
+  - These commands now provide a consistent syntax for the starred versions. The starred versions scale vertically.
+  - `mtupel` is now nestable
+  - `definedas` now looks better
+- add commands:
+  - `ceil`
+  - `floor`
+- rename commands:
+  - `mappliesto` to `appliesto`
+  - `mdefinedas` to `definedas`
+- remove commands:
+  - `\msetmidsa`
+- add latex indent config file to provide proper formatting of the `conditions` environment. To use this local config, make sure to use the `-l` switch. Read more [here](https://latexindentpl.readthedocs.io/en/latest/sec-indent-config-and-settings.html#localsettings-yaml-and-friends).
+- add `siunix` package
 
 ### 0.4.0
 - fix `conditions` being to wide
