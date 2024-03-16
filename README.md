@@ -20,9 +20,18 @@ This template comes with a sleek design that is kept closely to the originial La
 
 `exercise` is an environment for the exercises, including the solutions. Exercises are numbered within a `section`. The idea is, that each section represents a singe exercise sheet. Inside of this `exercise` environment can multiple `solution` environments be declared. These are numbered within the parent exercise environment.
 
+If you don't want to number the exercises according to the section, just use this macro:
+
+```tex
+\counterwithout{exercisecounter}{section}
+```
+
 There are also minute possibilities to customise these environments. Each `exercise` environment has the following keys:
 
 - `title` the title of the exercise (default "Exercise")
+- `subtitle` the subtitle of the exercise (default empty)
+- `points` the points of the exercise
+- `points/show` a boolean flag to indicate whether to show the points (default false)
 - `solution/title` the title for the solution declared within the exercise (default "Solution")
 
 #### Customization
@@ -67,9 +76,11 @@ For more details regarding Latex in general take a look at this [cheatsheet](htt
 The package [`babel`](https://ctan.org/pkg/babel) is used for language support. With the standard being Englisch. Additionally the package [`csquotes`](https://ctan.org/pkg/csquotes) is imported, for correct quotes based on the primary language selected via `babel`.
 
 You can change the language associated with the document by changing this line right after the begin of the document:
+
 ```tex
 \selectlanguage{english}
 ```
+
 The possible arguments for this are `english` and `naustrian`.
 
 ### Code
@@ -95,6 +106,7 @@ command.
 ### Header
 
 The author, matrikelnumber and date can be ommited by setting them blank before the `\maketitle` command:
+
 ```tex
 \author{}
 \matrikelnr{}
@@ -108,10 +120,12 @@ The author, matrikelnumber and date can be ommited by setting them blank before 
 ## Changelog
 
 ### 0.3.0
+
 - add `\msetmidsa` command, a standalone mid symbol for the `\mset{}` and `\mset*{}` commands
 - fix spacing error when no author is given
 
 ### 0.2.0
+
 - add `\msetmid` command
 - fix wrong primary language set
 - add option to specify language for the document
