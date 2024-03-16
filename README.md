@@ -151,17 +151,7 @@ command.
 
 ### Header
 
-The author, matrikelnumber and date can be ommited by setting them blank before the `\maketitle` command:
-
-```tex
-\author{}
-\matrikelnr{}
-\date{}
-
-...
-
-\maketitle
-```
+The author, matrikelnr, date, title and subtitle are optional, and default to an empty string.
 
 ## Changelog
 
