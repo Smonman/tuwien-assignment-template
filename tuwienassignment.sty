@@ -1,10 +1,10 @@
 %%% TUWIEN ASSIGNMENT TEMPLATE
 % Author: Simon Josef Kreuzpointner
-% Date: 07.03.2024
-% Version: 0.5.0
+% Date: 16.03.2024
+% Version: 0.6.0
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{tuwienassignment}[2024/03/07 inofficial TU Vienna assigment template]
+\ProvidesPackage{tuwienassignment}[2024/03/16 inofficial TU Vienna assigment template]
 
 % PACKAGES
 \RequirePackage[a4paper,top=3cm,bottom=2cm,left=2cm,right=2cm,headsep=1cm]{geometry} % layout
@@ -39,6 +39,7 @@
 \RequirePackage{tikz} % draw diagrams and figures
 \RequirePackage{varwidth} % variable width mini-page
 \RequirePackage{float} % 
+\RequirePackage{chngcntr} % new counter macros
 % MUST BE PLACED LAST
 \RequirePackage[colorlinks=true, allcolors=blue]{hyperref}
 
@@ -60,54 +61,61 @@
 %%% GRAPHIXS PATH
 \graphicspath{{./img/}}
 
+%%% TITLE, SUBTITLE, MATRIKELNR
+\DeclareRobustCommand\subtitle[1]{\gdef\@subtitle{#1}}
+\DeclareRobustCommand\matrikelnr[1]{\gdef\@matrikelnr{#1}}
+% defaults
+\title{}
+\subtitle{}
+\author{}
+\matrikelnr{}
+
 %%% TITLE STYLE
-\newcommand{\authormatrikelnrspacing}{\ifthenelse{\equal{\@author}{}}{}{\quad}}
+\newcommand{\authormatrikelnrspacing}{\ifthenelse{\equal{\@author}{}}{}{\ }}
 % before title
 \pretitle{%
-  \begin{raggedright}%
-    \Huge%
-    }%
-    % after title
-    \posttitle{%
-    \newline%
-  \end{raggedright}%
-  \noindent\vrule height 2.5pt width \textwidth%
+  \bgroup\raggedright%
+  \bgroup\Huge\bfseries%
+}%
+% after title
+\posttitle{%
+  \egroup%
+  \newline%
+  \ifthenelse{\equal{\@subtitle}{}}{}{\large\@subtitle\newline}%
+  \egroup%
+  \noindent\vrule height 1.5pt width \textwidth%
   \vskip .75em plus .25em minus .25em%
 }%
 % before author
 \preauthor{
-  \begin{raggedright}
-    \itshape%
-    }%
-    % after author
-    \postauthor{%
-  \end{raggedright}%
+  \bgroup\raggedright%
+  \itshape%
+}%
+% after author
+\postauthor{%
+  \egroup%
   \noindent\authormatrikelnrspacing\@matrikelnr%
   \newline%
 }%
 % before date
 \predate{
-  \begin{raggedright}
-    }
-    % after date
-    \postdate{
-  \end{raggedright}
-}
+  \bgroup\raggedright%
+}%
+% after date
+\postdate{
+  \egroup%
+}%
 
 %%% PAGESTYLE
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\nouppercase{\leftmark}}
-\fancyhead[R]{\@author \ \@matrikelnr}
+\fancyhead[R]{\@author\ \@matrikelnr}
 \renewcommand{\headrulewidth}{0.2pt}
 \fancyfoot[C]{\thepage}
 \renewcommand{\footrulewidth}{0.2pt}
 \renewcommand{\footruleskip}{1em}
 \renewcommand{\subsectionmark}[1]{\markright{\thesubsection\ #1}}
-
-\makeatletter
-\DeclareRobustCommand\matrikelnr[1]{\gdef\@matrikelnr{#1}}
-\makeatother
 
 %%% ITEMIZE STYLE
 \renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$}
@@ -266,32 +274,84 @@ shorten >=2pt
 \newcounter{exercisecounter}
 \newcounter{solutioncounter}
 % exercise
+\newif\ifshowexercisepoints
 \pgfkeys{
-  /exercise/.is family, /exercise,
+  /exercise/.is family,
+  /exercise/solution/.is family,
+  exercise,
   title/.estore in=\exercisetitle,
+  subtitle/.estore in=\exercisesubtitle,
+  points/.estore in=\exercisepoints,
+  points/show/.is if=showexercisepoints,
   solution/title/.estore in=\solutiontitle,
-  default/.style={title={Exercise},solution/title={Solution}}
+  default/.style={
+      title={Exercise},
+      subtitle={},
+      points/show=false,
+      solution/title={Solution},
+    },
 }
+% exercise title
+\newcommand{\printexercisetitle}{\formatexercisetitle}
+\newcommand{\formatexercisetitle}{\exercisetitle}
+% exercise subtitle
+\newcommand{\formatexercisesubtitle}{:\ (\exercisesubtitle)}
+\newcommand{\printexercisesubtitle}{\ifthenelse{\equal{\exercisesubtitle}{}}{}{\formatexercisesubtitle}}
+% exercise counter
+\newcommand{\formatexercisecounter}{\ \theexercisecounter}
+\newcommand{\printexercisecounter}{\formatexercisecounter}
+% exercise points
+\newcommand{\formatexercisepoints}{
+  \ %
+  \bgroup\mdseries\itshape%
+  [%
+    \exercisepoints \ %
+    \ifnum1=0\exercisepoints\relax%
+      point%
+    \else%
+      points%
+    \fi%
+  ]%
+  \egroup%
+}
+\newcommand{\printexercisepoints}{%
+  \ifshowexercisepoints
+    \formatexercisepoints
+  \fi
+}
+%environment
 \newenvironment{exercise}[1][]{
   \pgfkeys{/exercise, default, #1}
   \bigskip%
   \noindent%
   \setcounter{solutioncounter}{1}%
   \refstepcounter{exercisecounter}%
-  \textbf{\large \exercisetitle \ \theexercisecounter}%
+  \bgroup\bfseries\large%
+  \exercisetitle \printexercisecounter \printexercisesubtitle \printexercisepoints%
+  \egroup%
   \newline%
 }{
   \par%
   \bigskip%
 }
-\numberwithin{exercisecounter}{section}
+\counterwithin{exercisecounter}{section}
 % solution
+% solution title
+\newcommand{\formatsolutiontitle}{\solutiontitle}
+\newcommand{\printsolutiontitle}{\formatsolutiontitle}
+% solution counter
+\newcommand{\formatsolutioncounter}{\ \thesolutioncounter}
+\newcommand{\printsolutioncounter}{\formatsolutioncounter}
+% environment
 \newenvironment{solution}[1][]{
-  \pgfkeys{/exercise, default, #1}
+  \pgfkeys{/exercise/solution, #1}
   \par%
   \medskip%
   \noindent%
-  \textbf{\solutiontitle \ \thesolutioncounter}%
+  \bgroup%
+  \bfseries\normalsize%
+  \printsolutiontitle \printsolutioncounter%
+  \egroup%
   \newline%
 }{
   \refstepcounter{solutioncounter}%

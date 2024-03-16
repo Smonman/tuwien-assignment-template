@@ -50,15 +50,25 @@ This template loads a bunch of other packages:
 - `tikz`
 - `varwidth`
 - `float`
+- `chngcntr`
 - `hyperref`
 
 ### Exercises and Solutions
 
 `exercise` is an environment for the exercises, including the solutions. Exercises are numbered within a `section`. The idea is, that each section represents a singe exercise sheet. Inside of this `exercise` environment can multiple `solution` environments be declared. These are numbered within the parent exercise environment.
 
+If you don't want to number the exercises according to the section, just use this macro:
+
+```tex
+\counterwithout{exercisecounter}{section}
+```
+
 There are also minute possibilities to customise these environments. Each `exercise` environment has the following keys:
 
 - `title` the title of the exercise (default "Exercise")
+- `subtitle` the subtitle of the exercise (default empty)
+- `points` the points of the exercise
+- `points/show` a boolean flag to indicate whether to show the points (default false)
 - `solution/title` the title for the solution declared within the exercise (default "Solution")
 
 #### Customization
@@ -142,6 +152,7 @@ command.
 ### Header
 
 The author, matrikelnumber and date can be ommited by setting them blank before the `\maketitle` command:
+
 ```tex
 \author{}
 \matrikelnr{}
@@ -153,6 +164,14 @@ The author, matrikelnumber and date can be ommited by setting them blank before 
 ```
 
 ## Changelog
+
+### 0.6.0
+
+- add `\subtitle` command
+- set defaults for `\title`, `\subtitle`, `\author` and `\matrikelnr` to be empty
+- update exercise environments
+- add `subtitle` key to exercise environments
+- add `points` and `points/show` key to environments
 
 ### 0.5.1
 
