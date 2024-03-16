@@ -50,6 +50,7 @@ This template loads a bunch of other packages:
 - `tikz`
 - `varwidth`
 - `float`
+- `chngcntr`
 - `hyperref`
 
 ### Exercises and Solutions
@@ -163,6 +164,14 @@ The author, matrikelnumber and date can be ommited by setting them blank before 
 ```
 
 ## Changelog
+
+### 0.6.0
+
+- add `\subtitle` command
+- set defaults for `\title`, `\subtitle`, `\author` and `\matrikelnr` to be empty
+- update exercise environments
+- add `subtitle` key to exercise environments
+- add `points` and `points/show` key to environments
 
 ### 0.5.1
 
