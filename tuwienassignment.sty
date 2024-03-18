@@ -273,6 +273,8 @@ shorten >=2pt
 % counters
 \newcounter{exercisecounter}
 \newcounter{solutioncounter}
+\counterwithin{exercisecounter}{section}
+\counterwithin{solutioncounter}{exercisecounter}
 % exercise
 \newif\ifshowexercisepoints
 \pgfkeys{
@@ -320,21 +322,16 @@ shorten >=2pt
   \fi
 }
 %environment
-\newenvironment{exercise}[1][]{
-  \pgfkeys{/exercise, default, #1}
-  \bigskip%
-  \noindent%
-  \setcounter{solutioncounter}{1}%
+\newenvironment{exercise}[1][]{%
+  \pgfkeys{/exercise, default, #1}%
   \refstepcounter{exercisecounter}%
+  \vskip\bigskipamount\noindent%
   \bgroup\bfseries\large%
   \exercisetitle \printexercisecounter \printexercisesubtitle \printexercisepoints%
   \egroup%
-  \newline%
-}{
-  \par%
-  \bigskip%
-}
-\counterwithin{exercisecounter}{section}
+  \vskip\medskipamount\noindent%
+  \label{exe:\arabic{exercisecounter}}%
+}{}
 % solution
 % solution title
 \newcommand{\formatsolutiontitle}{\solutiontitle}
@@ -343,18 +340,14 @@ shorten >=2pt
 \newcommand{\formatsolutioncounter}{\ \thesolutioncounter}
 \newcommand{\printsolutioncounter}{\formatsolutioncounter}
 % environment
-\newenvironment{solution}[1][]{
-  \pgfkeys{/exercise/solution, #1}
-  \par%
-  \medskip%
-  \noindent%
+\newenvironment{solution}[1][]{%
+  \pgfkeys{/exercise/solution, #1}%
+  \refstepcounter{solutioncounter}%
+  \vskip\medskipamount\noindent%
   \bgroup%
   \bfseries\normalsize%
   \printsolutiontitle \printsolutioncounter%
   \egroup%
-  \newline%
-}{
-  \refstepcounter{solutioncounter}%
-  \par%
-  \medskip%
-}
+  \vskip\smallskipamount\noindent%
+  \label{sol:\arabic{solutioncounter}}%
+}{}
