@@ -1,10 +1,14 @@
 \documentclass[10pt]{article}
 \usepackage{tuwienassignment}
 
+\usepackage{listings}
 \usepackage{lipsum} % dummy text
-\newcommand{\environmentcmd}[1]{\par\noindent\textbf{Environment:} \lstinline{#1}}
-\newcommand{\commandcmd}[1]{\par\noindent\textbf{Command:} \lstinline{\\#1}}
-\newcommand{\commandscmd}[2]{\par\noindent\textbf{Commands:} \lstinline{\\#1} and \lstinline{\\#2}}
+\lstset{
+    basicstyle=\ttfamily
+}
+\newcommand{\environmentcmd}[1]{\par\noindent\textbf{Environment:} \lstinline^#1^}
+\newcommand{\commandcmd}[1]{\par\noindent\textbf{Command:} \lstinline^\\#1^}
+\newcommand{\commandscmd}[2]{\par\noindent\textbf{Commands:} \lstinline^\\#1^ and \lstinline^\\#2^}
 
 %%%
 %%% PLACE CUSTOM STYLES HERE
@@ -73,8 +77,9 @@
 \section{Exercises and Solutions}
 \environmentcmd{exercise} produces a numbered exercise, which prefixes the current section on their counter. The section can correspond to each exercise sheet for example.
 
-\environmentcmd{solution} produces a numbered solution. A solution has to be placed \emph{inside} of the exercise. Solutions will be numbered accordingly inside of an exercise environment. The number for a solution can be changed by writing the macro \lstinline|\setcounter{solutioncounter}{x}| where \lstinline{x} is the number the counter should be set to.
-The numberformat can also be changed by calling the macro \lstinline|\renewcommand{\thesolutioncounter}{x}| where \lstinline{x} is the format. For example for roman numerals it would be \lstinline|\roman{solutioncounter}|.
+\environmentcmd{solution} produces a numbered solution. A solution has to be placed \emph{inside} of the exercise. Solutions will be numbered accordingly inside of an exercise environment. The number for a solution can be changed by writing the macro \lstinline^\setcounter{solutioncounter}{x}^ where \lstinline^x^ is the number the counter should be set to.
+
+The numberformat can also be changed by calling the macro \lstinline^\renewcommand{\thesolutioncounter}{x}^ where \lstinline^x^ is the format. For example for roman numerals it would be \lstinline^\roman{solutioncounter}^.
 
 \begin{exercise}
   \lipsum[1-1]
@@ -247,103 +252,6 @@ It is possible to have different symbols instead of the dots:
 \end{table}
 
 Please note, that this only works in \emph{tabularx} columns.
-
-\section{lstlistings}
-
-\subsection{Python}
-\begin{lstlisting}[caption=Example in Python,language=python]
-import numpy as np
-    
-def incmatrix(genl1,genl2):
-    m = len(genl1)
-    n = len(genl2)
-    M = None #to become the incidence matrix
-    VT = np.zeros((n*m,1), int)  #dummy variable
-    
-    #compute the bitwise xor matrix
-    M1 = bitxormatrix(genl1)
-    M2 = np.triu(bitxormatrix(genl2),1) 
-
-    for i in range(m-1):
-        for j in range(i+1, m):
-            [r,c] = np.where(M2 == M1[i,j])
-            for k in range(len(r)):
-                VT[(i)*n + r[k]] = 1;
-                VT[(i)*n + c[k]] = 1;
-                VT[(j)*n + r[k]] = 1;
-                VT[(j)*n + c[k]] = 1;
-                
-                if M is None:
-                    M = np.copy(VT)
-                else:
-                    M = np.concatenate((M, VT), 1)
-                
-                VT = np.zeros((n*m,1), int)
-    
-    return M
-\end{lstlisting}
-
-\subsection{C++}
-
-\begin{lstlisting}[caption=Example in C++,language=c++]
-#include <iostream>
-using namespace std;
-
-int main() {
-    int n, t1 = 0, t2 = 1, nextTerm = 0;
-
-    cout << "Enter the number of terms: ";
-    cin >> n;
-
-    cout << "Fibonacci Series: ";
-
-    for (int i = 1; i <= n; ++i) {
-        // Prints the first two terms.
-        if(i == 1) {
-            cout << t1 << ", ";
-            continue;
-        }
-        if(i == 2) {
-            cout << t2 << ", ";
-            continue;
-        }
-        nextTerm = t1 + t2;
-        t1 = t2;
-        t2 = nextTerm;
-        
-        cout << nextTerm << ", ";
-    }
-    return 0;
-}
-\end{lstlisting}
-
-\subsection{Output}
-
-\begin{lstlisting}[style=lstoutput]
-Enter a positive integer: 100
-Fibonacci Series: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 
-\end{lstlisting}
-
-\subsection{Pseudocode}
-
-\begin{lstlisting}[caption=Example in Pseudo,language=pseudo]
-function Tree-Search(problem) returns a solution, or failure
-  initialize the frontier using the initial state of problem
-  loop do
-    if the frontier is empty then return failure
-    choose a leaf node and remove it from the frontier
-    if the node contains a goal state then return the corresponding solution
-    expand the chosen node, adding the resulting nodes to the frontier
-\end{lstlisting}
-
-\subsection{Standard}
-
-\begin{lstlisting}[caption=Very long line]
-This is a very very very very very very very very very very very very very very very very very very very very very long line.
-\end{lstlisting}
-
-\subsection{File Input}
-\lstinputlisting[caption=Example in C,language=C]{example.c}
 
 \section{Images}
 Take a look at this example image: \footnote{Copyright free image from \url{https://pixabay.com/illustrations/background-pattern-lemon-texture-6703215/}}
