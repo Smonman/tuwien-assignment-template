@@ -45,11 +45,11 @@ This template loads a bunch of other packages:
 - `nicematrix`
 - `multirow`
 - `makecell`
-- `listings`
 - `pgfkeys`
 - `tikz`
 - `varwidth`
 - `float`
+- `subcaption`
 - `chngcntr`
 - `hyperref`
 
@@ -129,14 +129,6 @@ You can change the language associated with the document by changing this line r
 
 The possible arguments for this are `english` and `naustrian`.
 
-### Code
-
-The package [`listings`](https://ctan.org/pkg/listings) is imported for displaying code. Also a style for code output and pseudocode are provided. The standard path for script files is set to `./scripts/`. This can be changed with the
-
-```tex
-\lstinputpath{{<path>}}
-```
-
 command.
 
 ### Graphics
@@ -154,6 +146,16 @@ command.
 The author, matrikelnr, date, title and subtitle are optional, and default to an empty string.
 
 ## Changelog
+
+### 0.7.0
+
+- adjust spacing for `solution` and `exercise` environments
+- add labels for `solution` and `exercise` environments of the form `sol:<index>` and `exe:<index>` respectively
+- remove `listings` package, for a better support of the previous settings take a look at [moderncode](https://github.com/Smonman/moderncode)
+- remove command `\lstinputpath`
+- remove `tikz` style called `arrow`
+- add `inline` option to `enumitem`
+- set thousands separator for `siunix` to a whitespace
 
 ### 0.6.0
 
