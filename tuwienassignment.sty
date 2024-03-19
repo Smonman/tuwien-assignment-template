@@ -1,10 +1,10 @@
 %%% TUWIEN ASSIGNMENT TEMPLATE
 % Author: Simon Josef Kreuzpointner
-% Date: 16.03.2024
-% Version: 0.6.0
+% Date: 19.03.2024
+% Version: 0.7.0
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{tuwienassignment}[2024/03/16 inofficial TU Vienna assigment template]
+\ProvidesPackage{tuwienassignment}[2024/03/19 inofficial TU Vienna assigment template]
 
 % PACKAGES
 \RequirePackage[a4paper,top=3cm,bottom=2cm,left=2cm,right=2cm,headsep=1cm]{geometry} % layout
@@ -23,7 +23,7 @@
 \RequirePackage{amsthm} % 
 \RequirePackage{siunitx} % SI units
 \RequirePackage{microtype} % improves the spacing between words and letters
-\RequirePackage{enumitem} % horizontal lists
+\RequirePackage[inline]{enumitem} % horizontal lists
 \RequirePackage{graphicx} % graphics, images
 \RequirePackage{array} % extension of array and tabular environments
 \RequirePackage{xcolor} % work with colors
@@ -34,11 +34,11 @@
 \RequirePackage{nicematrix} % better matrices
 \RequirePackage{multirow} % allow multirow cells
 \RequirePackage{makecell} % table cell configuration
-\RequirePackage{listings} % code listing
 \RequirePackage{pgfkeys} % pgf keys
 \RequirePackage{tikz} % draw diagrams and figures
 \RequirePackage{varwidth} % variable width mini-page
 \RequirePackage{float} % 
+\RequirePackage{subcaption} % subfigure
 \RequirePackage{chngcntr} % new counter macros
 % MUST BE PLACED LAST
 \RequirePackage[colorlinks=true, allcolors=blue]{hyperref}
@@ -130,72 +130,6 @@
         after ={\end{minipage}}
 }
 
-%%% LSTLISTING STYLE
-\lstdefinestyle{lststandardstyle}{
-  backgroundcolor=\color{codelightgray},
-  basicstyle=\ttfamily,
-  breakatwhitespace=false,
-  breaklines=true,
-  captionpos=t,
-  commentstyle=\color{codegray},
-  deletekeywords={},
-  extendedchars=true,
-  firstnumber=1,
-  frame=single,
-  keepspaces=true,
-  keywordstyle=\color{codeblue}\bfseries,
-  morekeywords={*,...},
-  numbers=left,
-  numbersep=5pt,
-  numberstyle=\sffamily\small\color{codegray},
-  rulecolor=\color{black},
-  showspaces=false,
-  showstringspaces=false,
-  showtabs=false,
-  stepnumber=1,
-  stringstyle=\color{codegreen},
-  tabsize=4,
-  escapeinside={(*}{*)},
-  linewidth=\columnwidth,
-  xleftmargin=3.4pt,
-  xrightmargin=3.4pt,
-  postbreak=\mbox{\textcolor{gray}{\(\hookrightarrow\)}\space},
-}
-\lstdefinestyle{lstoutput}{
-  backgroundcolor=\color{codelightgray},
-  basicstyle=\ttfamily,
-  breakatwhitespace=false,
-  breaklines=true,
-  captionpos=t,
-  extendedchars=true,
-  firstnumber=1,
-  frame=single,
-  keepspaces=true,
-  rulecolor=\color{black},
-  stepnumber=0,
-  tabsize=4,
-  title=Output,
-  escapeinside={(*}{*)},
-}
-\lstdefinelanguage{pseudo}{
-  mathescape=true,
-  basicstyle=,
-  keywordstyle=\color{black}\bfseries\em,
-  morekeywords={function, returns, return, if, then, else, and, or, not, loop, do, while, for, each, switch, case, foreach, begin, end, endif, until, repeat, null},
-  sensitive=false,
-  morecomment=[l]{//},
-  morecomment=[s]{/*}{*/},
-  morestring=[b]"
-}
-\lstset{
-  style=lststandardstyle,
-  framerule=0.8pt,
-  rulesep=0pt,
-  inputpath={{./scripts/}}
-}
-
-\newcommand{\lstinputpath}[1]{\lstset{inputpath=#1}}
-
 %%% TIKZ
 % tikz libraries
 \usetikzlibrary{
@@ -208,15 +142,6 @@
 
 % default node distance
 \tikzset{node distance=1cm}
-
-\tikzstyle{arrow} = [
-very thick,
-->,
--stealth,
-rounded corners=3mm,
-shorten <=2pt,
-shorten >=2pt
-]
 
 %%% PGF LAYERS
 % declare a new background layer beneath the main layer
@@ -234,6 +159,9 @@ shorten >=2pt
 \renewcommand\theadfont{\bfseries}
 \renewcommand{\theadalign}{cl}
 \renewcommand{\cellalign}{tl}
+
+%%% SIUNIX
+\sisetup{group-separator={\ }}
 
 %%% NEW COMMANDS
 % math set
@@ -273,6 +201,8 @@ shorten >=2pt
 % counters
 \newcounter{exercisecounter}
 \newcounter{solutioncounter}
+\counterwithin{exercisecounter}{section}
+\counterwithin{solutioncounter}{exercisecounter}
 % exercise
 \newif\ifshowexercisepoints
 \pgfkeys{
@@ -320,21 +250,16 @@ shorten >=2pt
   \fi
 }
 %environment
-\newenvironment{exercise}[1][]{
-  \pgfkeys{/exercise, default, #1}
-  \bigskip%
-  \noindent%
-  \setcounter{solutioncounter}{1}%
+\newenvironment{exercise}[1][]{%
+  \pgfkeys{/exercise, default, #1}%
   \refstepcounter{exercisecounter}%
+  \vskip\bigskipamount\noindent%
   \bgroup\bfseries\large%
   \exercisetitle \printexercisecounter \printexercisesubtitle \printexercisepoints%
   \egroup%
-  \newline%
-}{
-  \par%
-  \bigskip%
-}
-\counterwithin{exercisecounter}{section}
+  \vskip\medskipamount\noindent%
+  \label{exe:\arabic{exercisecounter}}%
+}{}
 % solution
 % solution title
 \newcommand{\formatsolutiontitle}{\solutiontitle}
@@ -343,18 +268,14 @@ shorten >=2pt
 \newcommand{\formatsolutioncounter}{\ \thesolutioncounter}
 \newcommand{\printsolutioncounter}{\formatsolutioncounter}
 % environment
-\newenvironment{solution}[1][]{
-  \pgfkeys{/exercise/solution, #1}
-  \par%
-  \medskip%
-  \noindent%
+\newenvironment{solution}[1][]{%
+  \pgfkeys{/exercise/solution, #1}%
+  \refstepcounter{solutioncounter}%
+  \vskip\medskipamount\noindent%
   \bgroup%
   \bfseries\normalsize%
   \printsolutiontitle \printsolutioncounter%
   \egroup%
-  \newline%
-}{
-  \refstepcounter{solutioncounter}%
-  \par%
-  \medskip%
-}
+  \vskip\smallskipamount\noindent%
+  \label{sol:\arabic{solutioncounter}}%
+}{}
