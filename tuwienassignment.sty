@@ -47,7 +47,6 @@
 \usepackage{glossaries-extra}
 
 %%% COLORS
-% standard colors
 \definecolor{myyellow}{rgb}{0.94, 0.82, 0.007}
 \definecolor{myred}{rgb}{0.75, 0.16, 0.18}
 \definecolor{myblue}{rgb}{0.13, 0.34, 0.53}
@@ -55,11 +54,6 @@
 \definecolor{mylightblue}{rgb}{0.39, 0.68, 1}
 \definecolor{mydarkgreen}{rgb}{0, 0.4, 0}
 \definecolor{mysmoke}{rgb}{0.9, 0.9, 0.9}
-% lstlisting
-\definecolor{codegray}{HTML}{707070}
-\definecolor{codelightgray}{HTML}{FAFAFA}
-\definecolor{codegreen}{HTML}{24751B}
-\definecolor{codeblue}{HTML}{1733BF}
 
 %%% GRAPHICS PATH
 \graphicspath{{./img/}}
@@ -73,7 +67,7 @@
 \author{}
 \matrikelnr{}
 
-%%% Set PDF document properties
+%%% PDF DOCUMENT PROPERTIES
 \hypersetup{%
   final,
   pdfpagelayout   = SinglePage,
@@ -141,6 +135,12 @@
   before={\begin{minipage}[t]{\linewidth}},
         after ={\end{minipage}}
 }
+
+\newlist{enumerateinline}{enumerate*}{1}
+\setlist[enumerateinline]{label={(\roman{*})}}
+
+\newlist{enumeratekeywords}{enumerate}{2}
+\setlist[enumeratekeywords]{leftmargin=*,align=left,font=\ttfamily\bfseries,label={}}
 
 %%% TIKZ
 % tikz libraries
