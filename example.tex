@@ -182,16 +182,16 @@ The numberformat can also be changed by calling the macro \lstinline^\renewcomma
         \[\msetmid*{x}{x \in \mset{a}}\]
 \end{itemize}
 
-\commandcmd{mtupel} produces the following:
+\commandcmd{mtuple} produces the following:
 \begin{itemize}
   \item \emph{non-starred}:
-        \[\mtupel{1, 2, 3, 4}\]
-        \[\mtupel{\frac{1}{2}, \frac{2}{3}}\]
-        \[\mtupel{}\]
+        \[\mtuple{1, 2, 3, 4}\]
+        \[\mtuple{\frac{1}{2}, \frac{2}{3}}\]
+        \[\mtuple{}\]
   \item \emph{starred}:
-        \[\mtupel*{1, 2, 3, 4}\]
-        \[\mtupel*{\frac{1}{2}, \frac{2}{3}}\]
-        \[\mtupel*{}\]
+        \[\mtuple*{1, 2, 3, 4}\]
+        \[\mtuple*{\frac{1}{2}, \frac{2}{3}}\]
+        \[\mtuple*{}\]
 \end{itemize}
 
 \subsection{Other}
@@ -203,7 +203,7 @@ which can be used e.g. in the following context:
 
 \commandcmd{definedas} produces the following:
 \[\definedas\]
-which can be used e.g. in the following context:
+which can be used e.g.\ in the following context:
 \[\mathbf{b}_i^r \definedas (1 - t) \cdot \mathbf{b}_i^{r - 1} + t \cdot \mathbf{b}_{i + 1}^{r - 1}\]
 
 \subsection{Conditions}
@@ -240,7 +240,7 @@ It is possible to have different symbols instead of the dots:
   \centering
   \begin{tabularx}{0.5\linewidth}{Y}
     \toprule
-    Header            \\
+    \thead{Header}    \\
     \midrule
     \begin{tabitemize}
       \item item 1
@@ -254,12 +254,11 @@ It is possible to have different symbols instead of the dots:
 Please note, that this only works in \emph{tabularx} columns.
 
 \section{Images}
-Take a look at this example image: \footnote{Copyright free image from \url{https://pixabay.com/illustrations/background-pattern-lemon-texture-6703215/}}
+Take a look at this example image\footnote{Copyright free image from \url{https://pixabay.com/illustrations/background-pattern-lemon-texture-6703215/}}:
 \begin{figure}[h!t]
   \centering
-  \includegraphics[scale=0.5]{happy_lemons.png}
-  \caption{Happy Lemons}
-  \label{fig:happylemons}
+  \includegraphics[scale=0.25]{happy_lemons.png}
+  \caption{\label{fig:happylemons}Happy Lemons}
 \end{figure}
 
 \end{document}

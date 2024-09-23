@@ -1,17 +1,18 @@
 %%% TUWIEN ASSIGNMENT TEMPLATE
 % Author: Simon Josef Kreuzpointner
-% Date: 19.03.2024
-% Version: 0.7.0
+% Date: 23.09.2024
+% Version: 0.8.0
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{tuwienassignment}[2024/03/19 inofficial TU Vienna assigment template]
+\ProvidesPackage{tuwienassignment}[2024/09/23 inofficial TU Vienna assigment template]
 
 % PACKAGES
 \RequirePackage[a4paper,top=3cm,bottom=2cm,left=2cm,right=2cm,headsep=1cm]{geometry} % layout
+\RequirePackage{lmodern} % Use an extension of the original Computer Modern font to minimize the use of bitmapped letters.
 \RequirePackage[utf8]{inputenc} % input encoding
 \RequirePackage[T1]{fontenc} % font encoding for umlaute
 \RequirePackage[naustrian,english]{babel} % language
-\RequirePackage{csquotes} % enqote
+\RequirePackage[autostyle]{csquotes} % enqote
 \RequirePackage{iflang} % conditional statements based on selected language
 \RequirePackage{ifthen} % for conditinal branching
 \RequirePackage[skip=4pt, indent=10pt]{parskip} % spacing between paragraphs
@@ -41,10 +42,11 @@
 \RequirePackage{subcaption} % subfigure
 \RequirePackage{chngcntr} % new counter macros
 % MUST BE PLACED LAST
-\RequirePackage[colorlinks=true, allcolors=blue]{hyperref}
+\RequirePackage{hyperref}
+\usepackage[acronym,toc]{glossaries} % Enables the generation of glossaries and lists of acronyms. This package has to be included after bable, fontenc, inputenc and hyperref
+\usepackage{glossaries-extra}
 
 %%% COLORS
-% standard colors
 \definecolor{myyellow}{rgb}{0.94, 0.82, 0.007}
 \definecolor{myred}{rgb}{0.75, 0.16, 0.18}
 \definecolor{myblue}{rgb}{0.13, 0.34, 0.53}
@@ -52,13 +54,8 @@
 \definecolor{mylightblue}{rgb}{0.39, 0.68, 1}
 \definecolor{mydarkgreen}{rgb}{0, 0.4, 0}
 \definecolor{mysmoke}{rgb}{0.9, 0.9, 0.9}
-% lstlisting
-\definecolor{codegray}{HTML}{707070}
-\definecolor{codelightgray}{HTML}{FAFAFA}
-\definecolor{codegreen}{HTML}{24751B}
-\definecolor{codeblue}{HTML}{1733BF}
 
-%%% GRAPHIXS PATH
+%%% GRAPHICS PATH
 \graphicspath{{./img/}}
 
 %%% TITLE, SUBTITLE, MATRIKELNR
@@ -69,6 +66,15 @@
 \subtitle{}
 \author{}
 \matrikelnr{}
+
+%%% PDF DOCUMENT PROPERTIES
+\hypersetup{%
+  final,
+  pdfpagelayout   = SinglePage,
+  pdfauthor       = {\@author},
+  pdftitle        = {\@title},
+  pdfdisplaydoctitle = true
+}
 
 %%% TITLE STYLE
 \newcommand{\authormatrikelnrspacing}{\ifthenelse{\equal{\@author}{}}{}{\ }}
@@ -130,14 +136,25 @@
         after ={\end{minipage}}
 }
 
+\newlist{enumerateinline}{enumerate*}{1}
+\setlist[enumerateinline]{label={(\roman{*})}}
+
+\newlist{enumeratekeywords}{enumerate}{2}
+\setlist[enumeratekeywords]{leftmargin=*,align=left,font=\ttfamily\bfseries,label={}}
+
 %%% TIKZ
 % tikz libraries
 \usetikzlibrary{
-  shapes.geometric,
-  arrows,
-  positioning,
+  arrows.meta,
+  backgrounds,
   bending,
-  fit
+  calc,
+  decorations.pathmorphing,
+  decorations.pathreplacing,
+  fit,
+  matrix,
+  positioning,
+  shapes.geometric
 }
 
 % default node distance
@@ -172,7 +189,7 @@
 \newcommand{\@@msetmid}[2]{\ensuremath{\mset{\, #1 \mid #2 \,}}}%
 \makeatother
 % math tuple
-\DeclarePairedDelimiter\mtupel{\langle}{\rangle}%
+\DeclarePairedDelimiter\mtuple{\langle}{\rangle}%
 % logical true and false
 \newcommand{\ltrue}{\top}%
 \newcommand{\lfalse}{\bot}%
