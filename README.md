@@ -29,10 +29,12 @@ This template loads a bunch of other packages:
 - `parskip`
 - `titling`
 - `fancyhdr`
+- `amsfonts`
 - `amsmath`
 - `amssymb`
 - `mathtools`
 - `amsthm`
+- `cancel`
 - `siunix`
 - `microtype`
 - `enumitem`
@@ -147,6 +149,12 @@ command.
 The author, matrikelnr, date, title and subtitle are optional, and default to an empty string.
 
 ## Changelog
+
+### 0.9.0
+
+- add `amsfonts` package
+- add `cancel` package
+- add `tikzmark` library
 
 ### 0.8.0
 
