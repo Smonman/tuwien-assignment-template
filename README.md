@@ -54,6 +54,7 @@ This template loads a bunch of other packages:
 - `float`
 - `subcaption`
 - `chngcntr`
+- `tcolorbox`
 - `hyperref`
 - `glossaries`
 - `glossaries-extra`
@@ -115,6 +116,7 @@ Moreover some math-related commands are changed or added:
 | `\definedas` | no | creates a colon with an equal sign |
 | `\ltrue` | no | alias for verum |
 | `\lfalse` | no | alias for falsum |
+| `\lxor` | no | alias for `otimes` |
 
 | environment | description |
 | --- | --- |
@@ -149,6 +151,16 @@ command.
 The author, matrikelnr, date, title and subtitle are optional, and default to an empty string.
 
 ## Changelog
+
+### 0.10.0
+
+- the last column in the `conditions` environment now scales to the full width of the line
+- add `\lxor` command
+- add missing `\ensuremath` restriction in some math commands
+- add TikZ style `overlaybox` that is intended to be used with `tikzmark`
+- add `tcolorbox` package
+- add custom `tcolorbox` box style `base`
+- add new enumeration environment `enumeratelabel`
 
 ### 0.9.0
 
