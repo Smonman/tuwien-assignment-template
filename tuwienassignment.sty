@@ -194,8 +194,9 @@
 % math tuple
 \DeclarePairedDelimiter\mtuple{\langle}{\rangle}%
 % logical true and false
-\newcommand{\ltrue}{\top}%
-\newcommand{\lfalse}{\bot}%
+\newcommand{\ltrue}{\ensuremath{\top}}%
+\newcommand{\lfalse}{\ensuremath{\bot}}%
+\newcommand{\lxor}{\ensuremath{\otimes}}%
 % abs and norm
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
@@ -205,7 +206,7 @@
 % appliesto
 \DeclareMathOperator{\appliesto}{,\quad}%
 % definedas
-\DeclareMathOperator{\definedas}{\coloneqq}%
+\DeclareMathOperator{\definedas}{\ensuremath{\coloneqq}}%
 
 %%% CONDITIONS
 \newenvironment{conditions}[1][\dots]{%
