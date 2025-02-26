@@ -19,6 +19,7 @@ This template comes with a sleek design that is kept closely to the originial La
 This template loads a bunch of other packages:
 
 - `geometry`
+- `lmodern`
 - `inputenc`
 - `fontenc`
 - `babel`
@@ -28,10 +29,12 @@ This template loads a bunch of other packages:
 - `parskip`
 - `titling`
 - `fancyhdr`
+- `amsfonts`
 - `amsmath`
 - `amssymb`
 - `mathtools`
 - `amsthm`
+- `cancel`
 - `siunix`
 - `microtype`
 - `enumitem`
@@ -52,6 +55,8 @@ This template loads a bunch of other packages:
 - `subcaption`
 - `chngcntr`
 - `hyperref`
+- `glossaries`
+- `glossaries-extra`
 
 ### Exercises and Solutions
 
@@ -105,7 +110,7 @@ Moreover some math-related commands are changed or added:
 | `\norm{}` | yes | |
 | `\mset{}` | yes | creates a simple set |
 | `\msetmid{}{}` | yes | creates a simple set with a mid symbol |
-| `\mtupel{}` | yes | creates a simple tupel |
+| `\mtuple{}` | yes | creates a simple tuple |
 | `\appliesto` | no | creates a comma with spacing |
 | `\definedas` | no | creates a colon with an equal sign |
 | `\ltrue` | no | alias for verum |
@@ -129,8 +134,6 @@ You can change the language associated with the document by changing this line r
 
 The possible arguments for this are `english` and `naustrian`.
 
-command.
-
 ### Graphics
 
 The standard `graphicspath` is set to `./img/`. This can be changed with the
@@ -146,6 +149,26 @@ command.
 The author, matrikelnr, date, title and subtitle are optional, and default to an empty string.
 
 ## Changelog
+
+### 0.9.0
+
+- add `amsfonts` package
+- add `cancel` package
+- add `tikzmark` library
+
+### 0.8.0
+
+- add `lmodern` package
+- add `glossaries` package
+- add `glossaries-extra` package
+- add `autostyle` option to `csquotes`
+- add hypersetup for the PDF author and PDF title among other things
+- bump TikZ library `arrows` to `arrows.meta`
+- add TiKZ library `backgrounds`, `calc`, `decorations.pathmorphing`, `decorations.pathreplacing` and `matrix`
+- add custom lists `enumerateinline` and `enumeratekeywords`
+- rename command `\mtupel` to `\mtuple`
+- remove link coloring
+- remove listing colors
 
 ### 0.7.0
 
