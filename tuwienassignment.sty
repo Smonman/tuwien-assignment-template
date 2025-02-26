@@ -129,6 +129,7 @@
 \renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$}
 
 %%% ENUMITEM
+% tabitemize
 \newlist{tabitemize}{itemize}{1}
 \setlist[tabitemize,1]{%
   label=\textbullet,
@@ -138,11 +139,17 @@
         after ={\end{minipage}}
 }
 
+% enumerate inline
 \newlist{enumerateinline}{enumerate*}{1}
 \setlist[enumerateinline]{label={(\roman{*})}}
 
+% enumeratekeywords
 \newlist{enumeratekeywords}{enumerate}{2}
 \setlist[enumeratekeywords]{leftmargin=*,align=left,font=\ttfamily\bfseries,label={}}
+
+% enumerate labels
+\newlist{enumeratelabels}{enumerate}{2}
+\setlist[enumeratelables]{leftmargin=*,labelindent=\parindent,itemindent=!,align=left}
 
 %%% TIKZ
 % tikz libraries
@@ -186,6 +193,7 @@
 %%% TABULARX
 % declare a new column type, that auto sizes but has ragged right text
 \newcolumntype{Z}{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}X}
+
 % declare a new column type, that auto sizes and centeres the text
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 
@@ -206,20 +214,26 @@
 \newcommand{\@msetmid}[2]{\ensuremath{\mset*{\, #1 \mathrel{\big|} #2 \,}}}%
 \newcommand{\@@msetmid}[2]{\ensuremath{\mset{\, #1 \mid #2 \,}}}%
 \makeatother
+
 % math tuple
 \DeclarePairedDelimiter\mtuple{\langle}{\rangle}%
-% logical true and false
+
+% logical true, false and xor
 \newcommand{\ltrue}{\ensuremath{\top}}%
 \newcommand{\lfalse}{\ensuremath{\bot}}%
 \newcommand{\lxor}{\ensuremath{\otimes}}%
+
 % abs and norm
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
 % ceil and floor
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}%
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}%
+
 % appliesto
 \DeclareMathOperator{\appliesto}{,\quad}%
+
 % definedas
 \DeclareMathOperator{\definedas}{\ensuremath{\coloneqq}}%
 
@@ -239,6 +253,7 @@
 \newcounter{solutioncounter}
 \counterwithin{exercisecounter}{section}
 \counterwithin{solutioncounter}{exercisecounter}
+
 % exercise
 \newif\ifshowexercisepoints
 \pgfkeys{
@@ -257,17 +272,21 @@
       solution/title={Solution},
     },
 }
+
 % exercise title
-\newcommand{\printexercisetitle}{\formatexercisetitle}
-\newcommand{\formatexercisetitle}{\exercisetitle}
+\newcommand{\printexercisetitle}{\formatexercisetitle}%
+\newcommand{\formatexercisetitle}{\exercisetitle}%
+
 % exercise subtitle
-\newcommand{\formatexercisesubtitle}{:\ (\exercisesubtitle)}
-\newcommand{\printexercisesubtitle}{\ifthenelse{\equal{\exercisesubtitle}{}}{}{\formatexercisesubtitle}}
+\newcommand{\formatexercisesubtitle}{:\ (\exercisesubtitle)}%
+\newcommand{\printexercisesubtitle}{\ifthenelse{\equal{\exercisesubtitle}{}}{}{\formatexercisesubtitle}}%
+
 % exercise counter
-\newcommand{\formatexercisecounter}{\ \theexercisecounter}
-\newcommand{\printexercisecounter}{\formatexercisecounter}
+\newcommand{\formatexercisecounter}{\ \theexercisecounter}%
+\newcommand{\printexercisecounter}{\formatexercisecounter}%
+
 % exercise points
-\newcommand{\formatexercisepoints}{
+\newcommand{\formatexercisepoints}{%
   \ %
   \bgroup\mdseries\itshape%
   [%
@@ -285,6 +304,7 @@
     \formatexercisepoints
   \fi
 }
+
 %environment
 \newenvironment{exercise}[1][]{%
   \pgfkeys{/exercise, default, #1}%
@@ -296,13 +316,15 @@
   \vskip\medskipamount\noindent%
   \label{exe:\arabic{exercisecounter}}%
 }{}
-% solution
+
 % solution title
-\newcommand{\formatsolutiontitle}{\solutiontitle}
-\newcommand{\printsolutiontitle}{\formatsolutiontitle}
+\newcommand{\formatsolutiontitle}{\solutiontitle}%
+\newcommand{\printsolutiontitle}{\formatsolutiontitle}%
+
 % solution counter
-\newcommand{\formatsolutioncounter}{\ \thesolutioncounter}
-\newcommand{\printsolutioncounter}{\formatsolutioncounter}
+\newcommand{\formatsolutioncounter}{\ \thesolutioncounter}%
+\newcommand{\printsolutioncounter}{\formatsolutioncounter}%
+
 % environment
 \newenvironment{solution}[1][]{%
   \pgfkeys{/exercise/solution, #1}%
