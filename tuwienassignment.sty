@@ -161,7 +161,19 @@
 }
 
 % default node distance
-\tikzset{node distance=1cm}
+\tikzset{%
+  node distance=1em,
+  overlaybox/.style={%
+      fill,
+      thick,
+      inner sep=0.5em,
+      rounded corners=0.2em,
+      fill opacity=0.2,
+      shift={(0.3em,0.3em)},
+      minimum width=1em,
+      minimum height=1em,
+    }
+}
 
 %%% PGF LAYERS
 % declare a new background layer beneath the main layer
