@@ -312,3 +312,38 @@
   \vskip\smallskipamount\noindent%
   \label{sol:\arabic{solutioncounter}}%
 }{}
+
+%%% TCOLORBOX
+% tcb libraries
+\tcbuselibrary{skins}
+
+% tcb custom style
+\tcbset{
+  base/.style n args={1}{
+      frame hidden,
+      boxrule=0mm,
+      enhanced,
+      arc=1mm,
+      arc is angular,
+      sharp corners=west,
+      bottomtitle=0.5mm,
+      colbacktitle=#1!10!white,
+      coltitle=#1,
+      fonttitle=\large\bfseries,
+      left=3.5mm,
+      right=3.5mm,
+      toptitle=1.75mm,
+      bottomtitle=1mm,
+      segmentation hidden,
+      parbox=false,
+      borderline west={1mm}{0mm}{#1!60!white}
+    },
+  base/.default={black},
+}
+
+% tcb math box
+\newtcolorbox{tcbmath}[1][]{
+  empty,
+  math,
+  #1
+}
