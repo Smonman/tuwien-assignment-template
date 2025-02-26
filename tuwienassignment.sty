@@ -22,7 +22,7 @@
 \RequirePackage{amsmath} % math
 \RequirePackage{amssymb} % math symbols
 \RequirePackage{mathtools} % enhances amsmath
-\RequirePackage{amsthm} % 
+\RequirePackage{amsthm} %
 \RequirePackage{cancel} %
 \RequirePackage{siunitx} % SI units
 \RequirePackage{microtype} % improves the spacing between words and letters
@@ -43,6 +43,7 @@
 \RequirePackage{float} % 
 \RequirePackage{subcaption} % subfigure
 \RequirePackage{chngcntr} % new counter macros
+\RequirePackage[most]{tcolorbox} %
 % MUST BE PLACED LAST
 \RequirePackage{hyperref}
 \usepackage[acronym,toc]{glossaries} % Enables the generation of glossaries and lists of acronyms. This package has to be included after bable, fontenc, inputenc and hyperref
@@ -140,16 +141,16 @@
 }
 
 % enumerate inline
-\newlist{enumerateinline}{enumerate*}{1}
-\setlist[enumerateinline]{label={(\roman{*})}}
+\newlist{enumerateinline}{enumerate*}{1}%
+\setlist[enumerateinline]{label={(\roman{*})}}%
 
 % enumeratekeywords
-\newlist{enumeratekeywords}{enumerate}{2}
-\setlist[enumeratekeywords]{leftmargin=*,align=left,font=\ttfamily\bfseries,label={}}
+\newlist{enumeratekeywords}{enumerate}{2}%
+\setlist[enumeratekeywords]{leftmargin=*,align=left,font=\ttfamily\bfseries,label={}}%
 
 % enumerate labels
-\newlist{enumeratelabels}{enumerate}{2}
-\setlist[enumeratelables]{leftmargin=*,labelindent=\parindent,itemindent=!,align=left}
+\newlist{enumeratelabels}{enumerate}{2}%
+\setlist[enumeratelabels]{leftmargin=*,align=left,labelindent=\parindent,itemindent=!,label={}}%
 
 %%% TIKZ
 % tikz libraries
@@ -339,9 +340,6 @@
 }{}
 
 %%% TCOLORBOX
-% tcb libraries
-\tcbuselibrary{skins}
-
 % tcb custom style
 \tcbset{
   base/.style n args={1}{
@@ -352,7 +350,8 @@
       arc is angular,
       sharp corners=west,
       bottomtitle=0.5mm,
-      colbacktitle=#1!10!white,
+      colbacktitle=#1!20!white,
+      colback=#1!10!white,
       coltitle=#1,
       fonttitle=\large\bfseries,
       left=3.5mm,
