@@ -73,6 +73,28 @@
         \end{enumerate}
 \end{enumerate}
 
+\subsection{Enumerateinline}
+\begin{enumerateinline}
+  \item This is the first item,
+  \item this is the second one,
+  \item then, we have the third one, and finally
+  \item the last one.
+\end{enumerateinline}
+
+\subsection{Enumeratelabels}
+\begin{enumeratelabels}[label={Step \arabic{*}:}]
+  \item This is the first step
+  \item This is the second step
+  \item[Custom] This is a custom step.
+\end{enumeratelabels}
+
+\subsection{Enumeratekeywords}
+\begin{enumeratekeywords}
+  \item[Win11] Windows 11
+  \item[Win10] Windows 10
+  \item[Win7] Windows 7
+\end{enumeratekeywords}
+
 \newpage
 \section{Exercises and Solutions}
 \environmentcmd{exercise} produces a numbered exercise, which prefixes the current section on their counter. The section can correspond to each exercise sheet for example.
@@ -231,6 +253,8 @@ It is possible to have different symbols instead of the dots:
 \[\ltrue\]
 \commandcmd{lfalse} produces the following:
 \[\lfalse\]
+\commandcmd{lxor} produces the following:
+\[\lxor\]
 
 \section{Tables}
 \subsection{Itemize in Tables}
@@ -260,5 +284,27 @@ Take a look at this example image\footnote{Copyright free image from \url{https:
   \includegraphics[scale=0.25]{happy_lemons.png}
   \caption{\label{fig:happylemons}Happy Lemons}
 \end{figure}
+
+\section{Colorboxes}
+
+\begin{tcolorbox}[base]
+  This is the base style.
+\end{tcolorbox}
+
+\begin{tcolorbox}[base,adjusted title={My adjusted title}]
+  This is the base style with an adjusted title.
+\end{tcolorbox}
+
+\begin{tcolorbox}[base=blue,adjusted title={My adjusted title}]
+  This is the base style with a custom color and an adjusted title.
+\end{tcolorbox}
+
+\begin{tcolorbox}[base=red,adjusted title={Look at the math!}]
+  This is the base style with a custom color and an adjusted title.
+  Furthermore, it contains a \lstinline^tcbmath^ box, with the \lstinline^equation*^ environment from \lstinline^amsmath^.
+  \begin{tcbmath}[ams equation*]
+    a^2 + b^2 = c^2
+  \end{tcbmath}
+\end{tcolorbox}
 
 \end{document}

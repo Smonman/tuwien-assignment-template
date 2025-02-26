@@ -1,10 +1,10 @@
 %%% TUWIEN ASSIGNMENT TEMPLATE
 % Author: Simon Josef Kreuzpointner
-% Date: 12.01.2025
-% Version: 0.9.0
+% Date: 27.02.2025
+% Version: 0.10.0
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{tuwienassignment}[2024/09/23 inofficial TU Vienna assigment template]
+\ProvidesPackage{tuwienassignment}[2024/02/27 inofficial TU Vienna assigment template]
 
 % PACKAGES
 \RequirePackage[a4paper,top=3cm,bottom=2cm,left=2cm,right=2cm,headsep=1cm]{geometry} % layout
@@ -22,7 +22,7 @@
 \RequirePackage{amsmath} % math
 \RequirePackage{amssymb} % math symbols
 \RequirePackage{mathtools} % enhances amsmath
-\RequirePackage{amsthm} % 
+\RequirePackage{amsthm} %
 \RequirePackage{cancel} %
 \RequirePackage{siunitx} % SI units
 \RequirePackage{microtype} % improves the spacing between words and letters
@@ -43,6 +43,7 @@
 \RequirePackage{float} % 
 \RequirePackage{subcaption} % subfigure
 \RequirePackage{chngcntr} % new counter macros
+\RequirePackage[most]{tcolorbox} %
 % MUST BE PLACED LAST
 \RequirePackage{hyperref}
 \usepackage[acronym,toc]{glossaries} % Enables the generation of glossaries and lists of acronyms. This package has to be included after bable, fontenc, inputenc and hyperref
@@ -129,39 +130,61 @@
 \renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$}
 
 %%% ENUMITEM
+% tabitemize
 \newlist{tabitemize}{itemize}{1}
 \setlist[tabitemize,1]{%
   label=\textbullet,
   left=0pt,
   nosep,
   before={\begin{minipage}[t]{\linewidth}},
-        after ={\end{minipage}}
+        after={\end{minipage}},
 }
 
-\newlist{enumerateinline}{enumerate*}{1}
-\setlist[enumerateinline]{label={(\roman{*})}}
+% enumerate inline
+\newlist{enumerateinline}{enumerate*}{1}%
+\setlist[enumerateinline]{label={(\roman{*})}}%
 
-\newlist{enumeratekeywords}{enumerate}{2}
-\setlist[enumeratekeywords]{leftmargin=*,align=left,font=\ttfamily\bfseries,label={}}
+% enumeratekeywords
+\newlist{enumeratekeywords}{enumerate}{2}%
+\setlist[enumeratekeywords]{leftmargin=*,align=left,font=\ttfamily\bfseries,label={}}%
+
+% enumerate labels
+\newlist{enumeratelabels}{enumerate}{2}%
+\setlist[enumeratelabels]{leftmargin=*,align=left,labelindent=\parindent,itemindent=!,label={}}%
 
 %%% TIKZ
 % tikz libraries
 \usetikzlibrary{
   arrows.meta,
+  automata,
   backgrounds,
   bending,
   calc,
   decorations.pathmorphing,
   decorations.pathreplacing,
   fit,
+  graphs,
+  intersections,
   matrix,
   positioning,
   shapes.geometric,
-  tikzmark
+  tikzmark,
 }
 
 % default node distance
-\tikzset{node distance=1cm}
+\tikzset{%
+  node distance=1em,
+  overlaybox/.style={%
+      fill,
+      thick,
+      inner sep=0.5em,
+      rounded corners=0.2em,
+      fill opacity=0.2,
+      shift={(0.3em,0.3em)},
+      minimum width=1em,
+      minimum height=1em,
+    }
+}
 
 %%% PGF LAYERS
 % declare a new background layer beneath the main layer
@@ -171,6 +194,7 @@
 %%% TABULARX
 % declare a new column type, that auto sizes but has ragged right text
 \newcolumntype{Z}{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}X}
+
 % declare a new column type, that auto sizes and centeres the text
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 
@@ -191,28 +215,35 @@
 \newcommand{\@msetmid}[2]{\ensuremath{\mset*{\, #1 \mathrel{\big|} #2 \,}}}%
 \newcommand{\@@msetmid}[2]{\ensuremath{\mset{\, #1 \mid #2 \,}}}%
 \makeatother
+
 % math tuple
 \DeclarePairedDelimiter\mtuple{\langle}{\rangle}%
-% logical true and false
-\newcommand{\ltrue}{\top}%
-\newcommand{\lfalse}{\bot}%
+
+% logical true, false and xor
+\newcommand{\ltrue}{\ensuremath{\top}}%
+\newcommand{\lfalse}{\ensuremath{\bot}}%
+\newcommand{\lxor}{\ensuremath{\otimes}}%
+
 % abs and norm
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
 % ceil and floor
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}%
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}%
+
 % appliesto
 \DeclareMathOperator{\appliesto}{,\quad}%
+
 % definedas
-\DeclareMathOperator{\definedas}{\coloneqq}%
+\DeclareMathOperator{\definedas}{\ensuremath{\coloneqq}}%
 
 %%% CONDITIONS
 \newenvironment{conditions}[1][\dots]{%
 \renewcommand{\arraystretch}{1.25}\par\noindent%
 \setlength\tabcolsep{1.5pt}%
 \newcommand{\sep}{#1}%
-\tabularx{\linewidth}{>{\(}r<{\)}>{\(}c<{\)}l}%
+\tabularx{\linewidth}{>{\(}r<{\)}>{\(}c<{\)}Z}%
 }{%
 \endtabularx\par\vspace{\belowdisplayskip}
 }
@@ -223,6 +254,7 @@
 \newcounter{solutioncounter}
 \counterwithin{exercisecounter}{section}
 \counterwithin{solutioncounter}{exercisecounter}
+
 % exercise
 \newif\ifshowexercisepoints
 \pgfkeys{
@@ -241,17 +273,21 @@
       solution/title={Solution},
     },
 }
+
 % exercise title
-\newcommand{\printexercisetitle}{\formatexercisetitle}
-\newcommand{\formatexercisetitle}{\exercisetitle}
+\newcommand{\printexercisetitle}{\formatexercisetitle}%
+\newcommand{\formatexercisetitle}{\exercisetitle}%
+
 % exercise subtitle
-\newcommand{\formatexercisesubtitle}{:\ (\exercisesubtitle)}
-\newcommand{\printexercisesubtitle}{\ifthenelse{\equal{\exercisesubtitle}{}}{}{\formatexercisesubtitle}}
+\newcommand{\formatexercisesubtitle}{:\ (\exercisesubtitle)}%
+\newcommand{\printexercisesubtitle}{\ifthenelse{\equal{\exercisesubtitle}{}}{}{\formatexercisesubtitle}}%
+
 % exercise counter
-\newcommand{\formatexercisecounter}{\ \theexercisecounter}
-\newcommand{\printexercisecounter}{\formatexercisecounter}
+\newcommand{\formatexercisecounter}{\ \theexercisecounter}%
+\newcommand{\printexercisecounter}{\formatexercisecounter}%
+
 % exercise points
-\newcommand{\formatexercisepoints}{
+\newcommand{\formatexercisepoints}{%
   \ %
   \bgroup\mdseries\itshape%
   [%
@@ -269,6 +305,7 @@
     \formatexercisepoints
   \fi
 }
+
 %environment
 \newenvironment{exercise}[1][]{%
   \pgfkeys{/exercise, default, #1}%
@@ -280,13 +317,15 @@
   \vskip\medskipamount\noindent%
   \label{exe:\arabic{exercisecounter}}%
 }{}
-% solution
+
 % solution title
-\newcommand{\formatsolutiontitle}{\solutiontitle}
-\newcommand{\printsolutiontitle}{\formatsolutiontitle}
+\newcommand{\formatsolutiontitle}{\solutiontitle}%
+\newcommand{\printsolutiontitle}{\formatsolutiontitle}%
+
 % solution counter
-\newcommand{\formatsolutioncounter}{\ \thesolutioncounter}
-\newcommand{\printsolutioncounter}{\formatsolutioncounter}
+\newcommand{\formatsolutioncounter}{\ \thesolutioncounter}%
+\newcommand{\printsolutioncounter}{\formatsolutioncounter}%
+
 % environment
 \newenvironment{solution}[1][]{%
   \pgfkeys{/exercise/solution, #1}%
@@ -299,3 +338,36 @@
   \vskip\smallskipamount\noindent%
   \label{sol:\arabic{solutioncounter}}%
 }{}
+
+%%% TCOLORBOX
+% tcb custom style
+\tcbset{
+  base/.style n args={1}{
+      frame hidden,
+      boxrule=0mm,
+      enhanced,
+      arc=1mm,
+      arc is angular,
+      sharp corners=west,
+      bottomtitle=0.5mm,
+      colbacktitle=#1!20!white,
+      colback=#1!10!white,
+      coltitle=#1,
+      fonttitle=\large\bfseries,
+      left=3.5mm,
+      right=3.5mm,
+      toptitle=1.75mm,
+      bottomtitle=1mm,
+      segmentation hidden,
+      parbox=false,
+      borderline west={1mm}{0mm}{#1!60!white}
+    },
+  base/.default={black},
+}
+
+% tcb math box
+\newtcolorbox{tcbmath}[1][]{
+  empty,
+  math,
+  #1
+}
