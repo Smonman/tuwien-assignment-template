@@ -1,11 +1,8 @@
-\documentclass[10pt]{article}
+\documentclass[a4paper,10pt,oneside]{scrartcl}
 \usepackage{tuwienassignment}
 
-\usepackage{listings}
 \usepackage{lipsum} % dummy text
-\lstset{
-    basicstyle=\ttfamily
-}
+
 \newcommand{\environmentcmd}[1]{\par\noindent\textbf{Environment:} \lstinline^#1^}
 \newcommand{\commandcmd}[1]{\par\noindent\textbf{Command:} \lstinline^\\#1^}
 \newcommand{\commandscmd}[2]{\par\noindent\textbf{Commands:} \lstinline^\\#1^ and \lstinline^\\#2^}
@@ -17,11 +14,12 @@
 \selectlanguage{english}
 
 \title{Title}
-\author{Author}
-\matrikelnr{12345678}
+\subtitle{Subtitle}
+\author{Author \matrikelnr{12345678}}
 
 \begin{document}
 \maketitle
+\tableofcontents
 
 \section{Introduction}
 \lipsum[1-1]
@@ -99,36 +97,36 @@
 \section{Exercises and Solutions}
 \environmentcmd{exercise} produces a numbered exercise, which prefixes the current section on their counter. The section can correspond to each exercise sheet for example.
 
-\environmentcmd{solution} produces a numbered solution. A solution has to be placed \emph{inside} of the exercise. Solutions will be numbered accordingly inside of an exercise environment. The number for a solution can be changed by writing the macro \lstinline^\setcounter{solutioncounter}{x}^ where \lstinline^x^ is the number the counter should be set to.
+\environmentcmd{solution} produces a numbered solution. A solution has to be placed \emph{inside} the exercise. Solutions will be numbered accordingly inside an exercise environment. The number for a solution can be changed by writing the macro \lstinline^\setcounter{solutioncounter}{x}^ where \lstinline^x^ is the number the counter should be set to.
 
-The numberformat can also be changed by calling the macro \lstinline^\renewcommand{\thesolutioncounter}{x}^ where \lstinline^x^ is the format. For example for roman numerals it would be \lstinline^\roman{solutioncounter}^.
+The number-format can also be changed by calling the macro \lstinline^\renewcommand{\thesolutioncounter}{x}^ where \lstinline^x^ is the format. For example for roman numerals it would be \lstinline^\roman{solutioncounter}^.
 
-\begin{exercise}
+\begin{exercise}%
   \lipsum[1-1]
-  \begin{solution}
+  \begin{solution}%
     \lipsum[1-1]
   \end{solution}
-  \begin{solution}
+  \begin{solution}%
     \lipsum[1-1]
   \end{solution}
-  \begin{solution}
+  \begin{solution}%
     \lipsum[1-1]
   \end{solution}
 \end{exercise}
 
-\begin{exercise}[title=Übung]
+\begin{exercise}[title=Übung]%
   \lipsum[1-1]
-  \begin{solution}
+  \begin{solution}%
     \lipsum[1-1]
   \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}%
   \renewcommand{\thesolutioncounter}{(\roman{solutioncounter})}%
   \lipsum[1-1]
-  \begin{solution}
+  \begin{solution}%
   \end{solution}
-  \begin{solution}
+  \begin{solution}%
   \end{solution}
 \end{exercise}
 
@@ -215,6 +213,20 @@ The numberformat can also be changed by calling the macro \lstinline^\renewcomma
         \[\mtuple*{\frac{1}{2}, \frac{2}{3}}\]
         \[\mtuple*{}\]
 \end{itemize}
+
+\subsection{Intervals}
+
+\commandcmd{intervaloo} produces the following:
+\[\intervaloo{1,3}\]
+
+\commandcmd{intervaloc} produces the following:
+\[\intervaloc{1,3}\]
+
+\commandcmd{intervalco} produces the following:
+\[\intervalco{1,3}\]
+
+\commandcmd{intervalcc} produces the following:
+\[\intervalcc{1,3}\]
 
 \subsection{Other}
 
