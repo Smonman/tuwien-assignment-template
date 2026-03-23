@@ -1,13 +1,14 @@
 %%% TUWIEN ASSIGNMENT TEMPLATE
 % Author: Simon Josef Kreuzpointner
-% Date: 27.02.2025
-% Version: 0.10.0
+% Date: 23.03.2026
+% Version: 0.11.0
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{tuwienassignment}[2024/02/27 inofficial TU Vienna assigment template]
+\ProvidesPackage{tuwienassignment}[2026/03/23 inofficial TU Vienna assigment template]
 
 % PACKAGES
-\RequirePackage[a4paper,top=3cm,bottom=2cm,left=2cm,right=2cm,headsep=1cm]{geometry} % layout
+\RequirePackage[hmargin=2cm,vmargin=3cm,headsep=0.8cm]{geometry} % layout
+\RequirePackage{scrlayer-scrpage}
 \RequirePackage{lmodern} % Use an extension of the original Computer Modern font to minimize the use of bitmapped letters.
 \RequirePackage[utf8]{inputenc} % input encoding
 \RequirePackage[T1]{fontenc} % font encoding for umlaute
@@ -15,9 +16,6 @@
 \RequirePackage[autostyle]{csquotes} % enqote
 \RequirePackage{iflang} % conditional statements based on selected language
 \RequirePackage{ifthen} % for conditinal branching
-\RequirePackage[skip=4pt, indent=10pt]{parskip} % spacing between paragraphs
-\RequirePackage{titling} % title
-\RequirePackage{fancyhdr} % header and footer
 \RequirePackage{amsfonts} % math font
 \RequirePackage{amsmath} % math
 \RequirePackage{amssymb} % math symbols
@@ -37,6 +35,7 @@
 \RequirePackage{nicematrix} % better matrices
 \RequirePackage{multirow} % allow multirow cells
 \RequirePackage{makecell} % table cell configuration
+\RequirePackage{listings} % code listings
 \RequirePackage{pgfkeys} % pgf keys
 \RequirePackage{tikz} % draw diagrams and figures
 \RequirePackage{varwidth} % variable width mini-page
@@ -46,29 +45,20 @@
 \RequirePackage[most]{tcolorbox} %
 % MUST BE PLACED LAST
 \RequirePackage{hyperref}
-\usepackage[acronym,toc]{glossaries} % Enables the generation of glossaries and lists of acronyms. This package has to be included after bable, fontenc, inputenc and hyperref
-\usepackage{glossaries-extra}
+\RequirePackage[acronym,toc]{glossaries} % Enables the generation of glossaries and lists of acronyms. This package has to be included after bable, fontenc, inputenc and hyperref
+\RequirePackage{glossaries-extra}
 
 %%% COLORS
-\definecolor{myyellow}{rgb}{0.94, 0.82, 0.007}
-\definecolor{myred}{rgb}{0.75, 0.16, 0.18}
-\definecolor{myblue}{rgb}{0.13, 0.34, 0.53}
-\definecolor{mydarkblue}{rgb}{0.1, 0.16, 0.27}
-\definecolor{mylightblue}{rgb}{0.39, 0.68, 1}
-\definecolor{mydarkgreen}{rgb}{0, 0.4, 0}
-\definecolor{mysmoke}{rgb}{0.9, 0.9, 0.9}
+\definecolor{tuayellow}{rgb}{0.94, 0.82, 0.007}
+\definecolor{tuared}{rgb}{0.75, 0.16, 0.18}
+\definecolor{tuablue}{rgb}{0.13, 0.34, 0.53}
+\definecolor{tuadarkblue}{rgb}{0.1, 0.16, 0.27}
+\definecolor{tualightblue}{rgb}{0.39, 0.68, 1}
+\definecolor{tuadarkgreen}{rgb}{0, 0.4, 0}
+\definecolor{tuasmoke}{rgb}{0.9, 0.9, 0.9}
 
 %%% GRAPHICS PATH
 \graphicspath{{./img/}}
-
-%%% TITLE, SUBTITLE, MATRIKELNR
-\DeclareRobustCommand\subtitle[1]{\gdef\@subtitle{#1}}
-\DeclareRobustCommand\matrikelnr[1]{\gdef\@matrikelnr{#1}}
-% defaults
-\title{}
-\subtitle{}
-\author{}
-\matrikelnr{}
 
 %%% PDF DOCUMENT PROPERTIES
 \hypersetup{%
@@ -80,54 +70,86 @@
 }
 
 %%% TITLE STYLE
-\newcommand{\authormatrikelnrspacing}{\ifthenelse{\equal{\@author}{}}{}{\ }}
-% before title
-\pretitle{%
-  \bgroup\raggedright%
-  \bgroup\Huge\bfseries%
+\setkomafont{title}{\Huge\bfseries}%
+\setkomafont{subtitle}{\Large}%
+\setkomafont{author}{\large\itshape}%
+\setkomafont{date}{\large}%
+\newkomafont{matrikelnr}{\ttfamily}%
+
+\renewcommand*{\@maketitle}{%
+\global\@topnum=\z@
+\setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
+\ifx\@titlehead\@empty \else
+  \begin{minipage}[t]{\textwidth}
+    \usekomafont{titlehead}{\@titlehead\par}%
+  \end{minipage}\par
+\fi
+\null
+\vskip 2em%
+\ifx\@subject\@empty \else
+  {\usekomafont{subject}{\@subject \par}}%
+  \vskip 1.5em
+\fi
+{\usekomafont{title}{\huge \@title \par}}%
+\vskip .5em
+  {\ifx\@subtitle\@empty\else\usekomafont{subtitle}\@subtitle\par\fi}%
+\vskip .5em
+\noindent\vrule height 1.5pt width \textwidth%
+\vskip .75em plus .25em minus .25em%
+  {%
+    \usekomafont{author}{%
+      \lineskip .5em%
+      \begin{tabular}[t]{@{}l}
+        \@author
+      \end{tabular}\par
+    }%
+  }%
+\vskip 1em%
+  {\usekomafont{date}{\@date \par}}%
+\vskip \z@ \@plus 1em
+  {\usekomafont{publishers}{\@publishers \par}}%
+\ifx\@dedication\@empty \else
+  \vskip 2em
+    {\usekomafont{dedication}{\@dedication \par}}%
+\fi
+\par
+\vskip 2em
 }%
-% after title
-\posttitle{%
-  \egroup%
-  \newline%
-  \ifthenelse{\equal{\@subtitle}{}}{}{\large\@subtitle\newline}%
-  \egroup%
-  \noindent\vrule height 1.5pt width \textwidth%
-  \vskip .75em plus .25em minus .25em%
-}%
-% before author
-\preauthor{
-  \bgroup\raggedright%
-  \itshape%
-}%
-% after author
-\postauthor{%
-  \egroup%
-  \noindent\authormatrikelnrspacing\@matrikelnr%
-  \newline%
-}%
-% before date
-\predate{
-  \bgroup\raggedright%
-}%
-% after date
-\postdate{
-  \egroup%
+
+%%% MATRIKELNR
+\NewDocumentCommand{\matrikelnr}{ m }{%
+  (\bgroup\usekomafont{matrikelnr}{#1}\egroup)%
 }%
 
 %%% PAGESTYLE
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{\nouppercase{\leftmark}}
-\fancyhead[R]{\@author\ \@matrikelnr}
-\renewcommand{\headrulewidth}{0.2pt}
-\fancyfoot[C]{\thepage}
-\renewcommand{\footrulewidth}{0.2pt}
-\renewcommand{\footruleskip}{1em}
-\renewcommand{\subsectionmark}[1]{\markright{\thesubsection\ #1}}
+\KOMAoptions{%
+  automark,
+  headsepline
+}
+\clearpairofpagestyles%
+% header
+\ihead{\@author}%
+\ohead{\leftmark}%
+% footer
+\ofoot{\pagemark}
 
-%%% ITEMIZE STYLE
-\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$}
+\RenewExpandableDocumentCommand{\pagemark}{}{%
+  \bgroup\usekomafont{pagenumber}\thepage\egroup%
+}
+\addtokomafont{pageheadfoot}{\upshape}
+
+% use header style
+\pagestyle{scrheadings}
+
+%\pagestyle{fancy}
+%\fancyhf{}
+%\fancyhead[L]{\nouppercase{\leftmark}}
+%\fancyhead[R]{\@author\ \@matrikelnr}
+%\renewcommand{\headrulewidth}{0.2pt}
+%\fancyfoot[C]{\thepage}
+%\renewcommand{\footrulewidth}{0.2pt}
+%\renewcommand{\footruleskip}{1em}
+%\renewcommand{\subsectionmark}[1]{\markright{\thesubsection\ #1}}
 
 %%% ENUMITEM
 % tabitemize
@@ -200,29 +222,32 @@
 
 %%% TABLE HEADER
 % set table header to bold
-\renewcommand\theadfont{\bfseries}
+\renewcommand{\theadfont}{\bfseries}
 \renewcommand{\theadalign}{cl}
 \renewcommand{\cellalign}{tl}
 
 %%% SIUNIX
 \sisetup{group-separator={\ }}
 
+%%% LISTINGS
+\lstset{
+  basicstyle=\ttfamily
+}
+
 %%% NEW COMMANDS
 % math set
 \DeclarePairedDelimiter\mset{\lbrace}{\rbrace}%
-\makeatletter
 \DeclareRobustCommand{\msetmid}{\@ifstar{\@msetmid}{\@@msetmid}}%
 \newcommand{\@msetmid}[2]{\ensuremath{\mset*{\, #1 \mathrel{\big|} #2 \,}}}%
 \newcommand{\@@msetmid}[2]{\ensuremath{\mset{\, #1 \mid #2 \,}}}%
-\makeatother
 
 % math tuple
 \DeclarePairedDelimiter\mtuple{\langle}{\rangle}%
 
 % logical true, false and xor
-\newcommand{\ltrue}{\ensuremath{\top}}%
-\newcommand{\lfalse}{\ensuremath{\bot}}%
-\newcommand{\lxor}{\ensuremath{\otimes}}%
+\NewDocumentCommand{\ltrue}{}{\ensuremath{\top}}%
+\NewDocumentCommand{\lfalse}{}{\ensuremath{\bot}}%
+\NewDocumentCommand{\lxor}{}{\ensuremath{\otimes}}%
 
 % abs and norm
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
@@ -238,11 +263,28 @@
 % definedas
 \DeclareMathOperator{\definedas}{\ensuremath{\coloneqq}}%
 
+% intervals
+\NewDocumentCommand{\interval}{ m m m }{%
+  #1#2#3%
+}
+\NewDocumentCommand{\intervaloo}{ m }{%
+  \interval{\left(}{#1}{\right)}%
+}
+\NewDocumentCommand{\intervaloc}{ m }{%
+  \interval{\left(}{#1}{\right]}%
+}
+\NewDocumentCommand{\intervalco}{ m }{%
+\interval{\left[}{#1}{\right)}%
+}
+\NewDocumentCommand{\intervalcc}{ m }{%
+\interval{\left[}{#1}{\right]}%
+}
+
 %%% CONDITIONS
 \newenvironment{conditions}[1][\dots]{%
 \renewcommand{\arraystretch}{1.25}\par\noindent%
 \setlength\tabcolsep{1.5pt}%
-\newcommand{\sep}{#1}%
+\NewDocumentCommand{\sep}{}{#1}%
 \tabularx{\linewidth}{>{\(}r<{\)}>{\(}c<{\)}Z}%
 }{%
 \endtabularx\par\vspace{\belowdisplayskip}
@@ -275,19 +317,19 @@
 }
 
 % exercise title
-\newcommand{\printexercisetitle}{\formatexercisetitle}%
-\newcommand{\formatexercisetitle}{\exercisetitle}%
+\NewDocumentCommand{\formatexercisetitle}{}{\exercisetitle}%
+\NewDocumentCommand{\printexercisetitle}{}{\formatexercisetitle}%
 
 % exercise subtitle
-\newcommand{\formatexercisesubtitle}{:\ (\exercisesubtitle)}%
-\newcommand{\printexercisesubtitle}{\ifthenelse{\equal{\exercisesubtitle}{}}{}{\formatexercisesubtitle}}%
+\NewDocumentCommand{\formatexercisesubtitle}{}{:\ (\exercisesubtitle)}%
+\NewDocumentCommand{\printexercisesubtitle}{}{\ifthenelse{\equal{\exercisesubtitle}{}}{}{\formatexercisesubtitle}}%
 
 % exercise counter
-\newcommand{\formatexercisecounter}{\ \theexercisecounter}%
-\newcommand{\printexercisecounter}{\formatexercisecounter}%
+\NewDocumentCommand{\formatexercisecounter}{}{\ \theexercisecounter}%
+\NewDocumentCommand{\printexercisecounter}{}{\formatexercisecounter}%
 
 % exercise points
-\newcommand{\formatexercisepoints}{%
+\NewDocumentCommand{\formatexercisepoints}{}{%
   \ %
   \bgroup\mdseries\itshape%
   [%
@@ -300,43 +342,45 @@
   ]%
   \egroup%
 }
-\newcommand{\printexercisepoints}{%
+\NewDocumentCommand{\printexercisepoints}{}{%
   \ifshowexercisepoints
     \formatexercisepoints
   \fi
 }
 
 %environment
-\newenvironment{exercise}[1][]{%
+\NewDocumentEnvironment{exercise}{ O{} }{%
   \pgfkeys{/exercise, default, #1}%
   \refstepcounter{exercisecounter}%
+  \stepcounter{subsection}%
   \vskip\bigskipamount\noindent%
-  \bgroup\bfseries\large%
-  \exercisetitle \printexercisecounter \printexercisesubtitle \printexercisepoints%
+  \bgroup%
+  \bgroup\usekomafont{disposition}\usekomafont{subsection}\exercisetitle\printexercisecounter\egroup \printexercisesubtitle\printexercisepoints%
   \egroup%
   \vskip\medskipamount\noindent%
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}\exercisetitle\ \expanded{\theexercisecounter}}%
   \label{exe:\arabic{exercisecounter}}%
 }{}
 
 % solution title
-\newcommand{\formatsolutiontitle}{\solutiontitle}%
-\newcommand{\printsolutiontitle}{\formatsolutiontitle}%
+\NewDocumentCommand{\formatsolutiontitle}{}{\solutiontitle}%
+\NewDocumentCommand{\printsolutiontitle}{}{\formatsolutiontitle}%
 
 % solution counter
-\newcommand{\formatsolutioncounter}{\ \thesolutioncounter}%
-\newcommand{\printsolutioncounter}{\formatsolutioncounter}%
+\NewDocumentCommand{\formatsolutioncounter}{}{\ \thesolutioncounter}%
+\NewDocumentCommand{\printsolutioncounter}{}{\formatsolutioncounter}%
 
 % environment
-\newenvironment{solution}[1][]{%
-  \pgfkeys{/exercise/solution, #1}%
+\NewDocumentEnvironment{solution}{ O{} }{%
+  \pgfkeys{/exercise/solution,#1}%
   \refstepcounter{solutioncounter}%
-  \vskip\medskipamount\noindent%
+  \stepcounter{subsubsection}%
+  \vskip\bigskipamount\noindent%
   \bgroup%
-  \bfseries\normalsize%
-  \printsolutiontitle \printsolutioncounter%
-  \egroup%
-  \vskip\smallskipamount\noindent%
-  \label{sol:\arabic{solutioncounter}}%
+  \bgroup\usekomafont{disposition}\usekomafont{subsubsection}\printsolutiontitle\printsolutioncounter\egroup%
+  \egroup\vskip\medskipamount\noindent%
+  \addcontentsline{toc}{subsubsection}{\protect\numberline{\thesubsubsection}\expanded{\solutiontitle}\ \expanded{\thesolutioncounter}}%
+  \label{sol:\arabic{exercisecounter}-\arabic{solutioncounter}}%
 }{}
 
 %%% TCOLORBOX

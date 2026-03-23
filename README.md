@@ -1,20 +1,20 @@
 # tuwien-assignment-template
 
-An inofficial Latex template for TU Vienna assignments. Take a look at the [example](https://github.com/Smonman/tuwien-assignment-template/blob/main/example.pdf).
+An in-official Latex template for TU Vienna assignments. Take a look at the [example](https://github.com/Smonman/tuwien-assignment-template/blob/main/example.pdf).
 
 _This Latex template aims to streamline the writing of digital assignments._
 
 ## Why should I use this template?
 
-Writing assignments isn't necessarily a joyful activity. Out of a need to reduce workload this template was written. Its purpose is not to be an efficient lightweight template but rather a fully loaded, plug-and-play, out of the box template. It provides additional commands to help specificly with assignments. The idea was that one can start working using this template, without worring about packages to import or settings to change.
+Writing assignments isn't necessarily a joyful activity. Out of a need to reduce workload this template was written. Its purpose is not to be an efficient lightweight template but rather a fully loaded, plug-and-play, out of the box template. It provides additional commands to help specifically with assignments. The idea was that one can start working using this template, without worrying about packages to import or settings to change.
 
 ## How do I use this template?
 
-Download the latest version of this template [here](https://github.com/Smonman/tuwien-assignment-template/releases). When using [Overleaf](https://www.overleaf.com/project) press "New Project" > "Upload Project" and select the downloaded ZIP archive.
+Download the latest version of this template from the [release page](https://github.com/Smonman/tuwien-assignment-template/releases). When using [Overleaf](https://www.overleaf.com/project) press "New Project" > "Upload Project" and select the downloaded ZIP archive.
 
 ## What can this template do?
 
-This template comes with a sleek design that is kept closely to the originial Latex article style. It also provides environments for exercises and solutions. Which are conveniently numbered.
+This template comes with a sleek design that is kept closely to the original Latex article style. It also provides environments for exercises and solutions. Which are conveniently numbered.
 
 This template loads a bunch of other packages:
 
@@ -26,9 +26,6 @@ This template loads a bunch of other packages:
 - `csquotes`
 - `iflang`
 - `ifthen`
-- `parskip`
-- `titling`
-- `fancyhdr`
 - `amsfonts`
 - `amsmath`
 - `amssymb`
@@ -48,6 +45,7 @@ This template loads a bunch of other packages:
 - `nicematrix`
 - `multirow`
 - `makecell`
+- `listings`
 - `pgfkeys`
 - `tikz`
 - `varwidth`
@@ -61,7 +59,7 @@ This template loads a bunch of other packages:
 
 ### Exercises and Solutions
 
-`exercise` is an environment for the exercises, including the solutions. Exercises are numbered within a `section`. The idea is, that each section represents a singe exercise sheet. Inside of this `exercise` environment can multiple `solution` environments be declared. These are numbered within the parent exercise environment.
+`exercise` is an environment for the exercises, including the solutions. Exercises are numbered within a `section`. The idea is, that each section represents a singe exercise sheet. Inside this `exercise` environment multiple `solution` environments can be declared. These are numbered within the parent exercise environment.
 
 If you don't want to number the exercises according to the section, just use this macro:
 
@@ -69,7 +67,7 @@ If you don't want to number the exercises according to the section, just use thi
 \counterwithout{exercisecounter}{section}
 ```
 
-There are also minute possibilities to customise these environments. Each `exercise` environment has the following keys:
+There are also minute possibilities to customize these environments. Each `exercise` environment has the following keys:
 
 - `title` the title of the exercise (default "Exercise")
 - `subtitle` the subtitle of the exercise (default empty)
@@ -87,7 +85,8 @@ If a specific solution counter should be set to a specific value, this can be do
 
 macro, where `x` is the new starting number for the counter.
 
-> **Note**: that the following solutions will also be affected.
+> [!NOTE]
+> that the following solutions will also be affected.
 
 If the numbering style of the solutions within an `exercise` environment should be changed, this currently cannot be done via keys, but has to be done _manually_ via the command:
 
@@ -95,13 +94,13 @@ If the numbering style of the solutions within an `exercise` environment should 
 \renewcommand{\thesolutioncounter}{(\roman{solutioncounter})}
 ```
 
-at the top inside of the corresponding `exercise` environment. In this case, the enumeration will be lowercase roman numerals in braces.
+at the top inside the corresponding `exercise` environment. In this case, the enumeration will be lowercase roman numerals in braces.
 
 ### Math
 
 The packages [`amsmath`](https://ctan.org/pkg/amsmath), `amssymb`, [`mathtools`](https://ctan.org/pkg/mathtools) and [`amsthm`](https://ctan.org/pkg/amsthm) are already supplied via the template. Writing proofs and theorems can be done easily via the environments provided by the `amsthm` package. Take a look at [this guide](https://de.overleaf.com/learn/latex/Theorems_and_proofs) for more details.
 
-Moreover some math-related commands are changed or added:
+Moreover, some math-related commands are changed or added:
 
 | command | has starred version | description |
 | --- | --- | --- |
@@ -117,6 +116,10 @@ Moreover some math-related commands are changed or added:
 | `\ltrue` | no | alias for verum |
 | `\lfalse` | no | alias for falsum |
 | `\lxor` | no | alias for `otimes` |
+| `\intervaloo` | no | interval (open, open) |
+| `\intervaloc` | no | interval (open, closed) |
+| `\intervalco` | no | interval (closed, open) |
+| `\intervalcc` | no | interval (closed, closed) |
 
 | environment | description |
 | --- | --- |
@@ -126,9 +129,9 @@ For more details regarding Latex in general take a look at this [cheatsheet](htt
 
 ### Language
 
-The package [`babel`](https://ctan.org/pkg/babel) is used for language support. With the standard being Englisch. Additionally the package [`csquotes`](https://ctan.org/pkg/csquotes) is imported, for correct quotes based on the primary language selected via `babel`.
+The package [`babel`](https://ctan.org/pkg/babel) is used for language support. With the standard being English. Additionally, the package [`csquotes`](https://ctan.org/pkg/csquotes) is imported, for correct quotes based on the primary language selected via `babel`.
 
-You can change the language associated with the document by changing this line right after the begin of the document:
+You can change the language associated with the document by changing this line right after the begining of the document:
 
 ```tex
 \selectlanguage{english}
@@ -148,9 +151,26 @@ command.
 
 ### Header
 
-The author, matrikelnr, date, title and subtitle are optional, and default to an empty string.
+The author, Matrikel-Number, date, title and subtitle are optional, and default to an empty string.
 
 ## Changelog
+
+### 0.11.0
+
+- remove `parskip` package
+- remove `titling` package
+- remove `fancyhdr` package
+- the template now expects a document class from the KOMAscript universe
+- the Matrikel-Number now has to be supplied inside the author field
+- the `geometry` package is no longer supplied with the `a4paper` key
+- the margins have been changed to 2 cm horizontal and 3 cm vertical
+- migrate all commands to use the newer `\NewDocumentCommand` functionality
+- migrate all environments to use the newer `\NewDocumentEnvironment` functionality
+- add `\intervaloo`, `\intervaloc`, `\intervalco`, `\intervalcc`
+- the `exercise` environment now _behaves_ like a `subsection`
+- the `solution` environment now _behaves_ like a `subsubsection`
+- the `exercise` and `solution` environment are now correctly shown in the TOC
+- rename colors prefix from "my" to "tua"
 
 ### 0.10.0
 
