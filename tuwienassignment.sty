@@ -1,13 +1,14 @@
 %%% TUWIEN ASSIGNMENT TEMPLATE
 % Author: Simon Josef Kreuzpointner
-% Date: 23.03.2026
-% Version: 0.11.0
+% Date: 2026-11-10
+% Version: 0.12.0
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{tuwienassignment}[2026/03/23 inofficial TU Vienna assigment template]
+\ProvidesPackage{tuwienassignment}[2026/11/10 inofficial TU Vienna assigment template]
 
 % PACKAGES
-\RequirePackage[hmargin=2cm,vmargin=3cm,headsep=0.8cm]{geometry} % layout
+\RequirePackage{ifdraft} %
+\RequirePackage[hscale=0.85,vscale=0.85,vmarginratio={2:3},heightrounded]{geometry} % layout
 \RequirePackage{scrlayer-scrpage}
 \RequirePackage{lmodern} % Use an extension of the original Computer Modern font to minimize the use of bitmapped letters.
 \RequirePackage[utf8]{inputenc} % input encoding
@@ -45,8 +46,16 @@
 \RequirePackage[most]{tcolorbox} %
 % MUST BE PLACED LAST
 \RequirePackage{hyperref}
+\RequirePackage{hyperxmp}
 \RequirePackage[acronym,toc]{glossaries} % Enables the generation of glossaries and lists of acronyms. This package has to be included after bable, fontenc, inputenc and hyperref
 \RequirePackage{glossaries-extra}
+
+% show geometry frames when in draft mode
+\ifdraft{%
+  \geometry{showframe}%
+}{%
+  % do nothing
+}%
 
 %%% COLORS
 \definecolor{tuayellow}{rgb}{0.94, 0.82, 0.007}
@@ -62,11 +71,14 @@
 
 %%% PDF DOCUMENT PROPERTIES
 \hypersetup{%
-  final,
-  pdfpagelayout   = SinglePage,
-  pdfauthor       = {\@author},
-  pdftitle        = {\@title},
+  pdfpagelayout = SinglePage,
   pdfdisplaydoctitle = true
+}
+% set hyperref to final if draft is not given
+\ifdraft{%
+  % do nothing
+}{%
+  \hypersetup{final}
 }
 
 %%% TITLE STYLE
@@ -77,43 +89,48 @@
 \newkomafont{matrikelnr}{\ttfamily}%
 
 \renewcommand*{\@maketitle}{%
-\global\@topnum=\z@
-\setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
-\ifx\@titlehead\@empty \else
-  \begin{minipage}[t]{\textwidth}
-    \usekomafont{titlehead}{\@titlehead\par}%
-  \end{minipage}\par
-\fi
-\null
-\vskip 2em%
-\ifx\@subject\@empty \else
-  {\usekomafont{subject}{\@subject \par}}%
-  \vskip 1.5em
-\fi
-{\usekomafont{title}{\huge \@title \par}}%
-\vskip .5em
-  {\ifx\@subtitle\@empty\else\usekomafont{subtitle}\@subtitle\par\fi}%
-\vskip .5em
-\noindent\vrule height 1.5pt width \textwidth%
-\vskip .75em plus .25em minus .25em%
-  {%
-    \usekomafont{author}{%
-      \lineskip .5em%
-      \begin{tabular}[t]{@{}l}
-        \@author
-      \end{tabular}\par
+  \global\@topnum=\z@
+  \setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
+  \ifx\@titlehead\@empty \else
+    \begin{minipage}[t]{\textwidth}
+      \usekomafont{titlehead}{\@titlehead\par}%
+    \end{minipage}\par
+  \fi
+  \null
+  \vskip 2em%
+  \ifx\@subject\@empty \else
+    {\usekomafont{subject}{\@subject \par}}%
+    \vskip 1.5em
+  \fi
+  {\usekomafont{title}{\huge \@title \par}}%
+  \vskip .5em
+    {\ifx\@subtitle\@empty\else\usekomafont{subtitle}\@subtitle\par\fi}%
+  \vskip .5em
+  \noindent\vrule height 1.5pt width \textwidth%
+  \vskip .75em plus .25em minus .25em%
+    {%
+      \usekomafont{author}{%
+        \lineskip .5em%
+        \begin{tabular}[t]{@{}l}
+          \@author
+        \end{tabular}\par
+      }%
     }%
-  }%
-\vskip 1em%
-  {\usekomafont{date}{\@date \par}}%
-\vskip \z@ \@plus 1em
-  {\usekomafont{publishers}{\@publishers \par}}%
-\ifx\@dedication\@empty \else
-  \vskip 2em
-    {\usekomafont{dedication}{\@dedication \par}}%
-\fi
-\par
-\vskip 2em
+  \vskip 1em%
+    {\usekomafont{date}{\@date \par}}%
+  \vskip \z@ \@plus 1em
+    {\usekomafont{publishers}{\@publishers \par}}%
+  \ifx\@dedication\@empty \else
+    \vskip 2em
+      {\usekomafont{dedication}{\@dedication \par}}%
+  \fi
+  \par
+  \vskip 2em%
+  % set auther and title PDF metadata
+  \hypersetup{%
+    pdfauthor = {\@author},
+    pdftitle = {\@title}
+  }
 }%
 
 %%% MATRIKELNR
@@ -159,7 +176,7 @@
   left=0pt,
   nosep,
   before={\begin{minipage}[t]{\linewidth}},
-        after={\end{minipage}},
+  after={\end{minipage}},
 }
 
 % enumerate inline
@@ -271,7 +288,7 @@
   \interval{\left(}{#1}{\right)}%
 }
 \NewDocumentCommand{\intervaloc}{ m }{%
-  \interval{\left(}{#1}{\right]}%
+\interval{\left(}{#1}{\right]}%
 }
 \NewDocumentCommand{\intervalco}{ m }{%
 \interval{\left[}{#1}{\right)}%
@@ -282,12 +299,12 @@
 
 %%% CONDITIONS
 \newenvironment{conditions}[1][\dots]{%
-\renewcommand{\arraystretch}{1.25}\par\noindent%
-\setlength\tabcolsep{1.5pt}%
-\NewDocumentCommand{\sep}{}{#1}%
-\tabularx{\linewidth}{>{\(}r<{\)}>{\(}c<{\)}Z}%
+  \renewcommand{\arraystretch}{1.25}\par\noindent%
+  \setlength\tabcolsep{1.5pt}%
+  \NewDocumentCommand{\sep}{}{#1}%
+  \tabularx{\linewidth}{>{\(}r<{\)}>{\(}c<{\)}Z}%
 }{%
-\endtabularx\par\vspace{\belowdisplayskip}
+  \endtabularx\par\vspace{\belowdisplayskip}
 }
 
 %%% EXERCISE AND SOLUTION

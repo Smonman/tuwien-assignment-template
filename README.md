@@ -18,7 +18,9 @@ This template comes with a sleek design that is kept closely to the original Lat
 
 This template loads a bunch of other packages:
 
+- `ifdraft`
 - `geometry`
+- `scrlayer-scrpage`
 - `lmodern`
 - `inputenc`
 - `fontenc`
@@ -32,7 +34,7 @@ This template loads a bunch of other packages:
 - `mathtools`
 - `amsthm`
 - `cancel`
-- `siunix`
+- `siunitx`
 - `microtype`
 - `enumitem`
 - `graphicx`
@@ -54,8 +56,9 @@ This template loads a bunch of other packages:
 - `chngcntr`
 - `tcolorbox`
 - `hyperref`
+- `hyperxmp`
 - `glossaries`
-- `glossaries-extra`
+- `glossaries-ext`
 
 ### Exercises and Solutions
 
@@ -154,6 +157,15 @@ command.
 The author, Matrikel-Number, date, title and subtitle are optional, and default to an empty string.
 
 ## Changelog
+
+### 0.12.0
+
+- changed how the margins are computed. This is done so this template can be used with KOMA classes that do not use typearea but DIV.
+- added `ifdraft` package
+- added `hyperxmp` package for XMP metadata
+- the PDF metadata for author and title are now set whenever `\maketitle` is used
+- the PDF metadata `final` is now only set if the `draft` option is not given on the document class
+- of the `draft` option is given, document frames are shown
 
 ### 0.11.0
 
