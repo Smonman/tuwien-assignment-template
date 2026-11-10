@@ -176,7 +176,7 @@
   left=0pt,
   nosep,
   before={\begin{minipage}[t]{\linewidth}},
-        after={\end{minipage}},
+  after={\end{minipage}},
 }
 
 % enumerate inline
@@ -288,7 +288,7 @@
   \interval{\left(}{#1}{\right)}%
 }
 \NewDocumentCommand{\intervaloc}{ m }{%
-  \interval{\left(}{#1}{\right]}%
+\interval{\left(}{#1}{\right]}%
 }
 \NewDocumentCommand{\intervalco}{ m }{%
 \interval{\left[}{#1}{\right)}%
@@ -299,12 +299,12 @@
 
 %%% CONDITIONS
 \newenvironment{conditions}[1][\dots]{%
-\renewcommand{\arraystretch}{1.25}\par\noindent%
-\setlength\tabcolsep{1.5pt}%
-\NewDocumentCommand{\sep}{}{#1}%
-\tabularx{\linewidth}{>{\(}r<{\)}>{\(}c<{\)}Z}%
+  \renewcommand{\arraystretch}{1.25}\par\noindent%
+  \setlength\tabcolsep{1.5pt}%
+  \NewDocumentCommand{\sep}{}{#1}%
+  \tabularx{\linewidth}{>{\(}r<{\)}>{\(}c<{\)}Z}%
 }{%
-\endtabularx\par\vspace{\belowdisplayskip}
+  \endtabularx\par\vspace{\belowdisplayskip}
 }
 
 %%% EXERCISE AND SOLUTION
