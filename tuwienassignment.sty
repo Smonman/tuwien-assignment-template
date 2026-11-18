@@ -1,10 +1,10 @@
 %%% TUWIEN ASSIGNMENT TEMPLATE
 % Author: Simon Josef Kreuzpointner
-% Date: 2026-11-10
-% Version: 0.12.0
+% Date: 2026-11-18
+% Version: 0.12.1
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{tuwienassignment}[2026/11/10 inofficial TU Vienna assigment template]
+\ProvidesPackage{tuwienassignment}[2026/11/18 inofficial TU Vienna assigment template]
 
 % PACKAGES
 \RequirePackage{ifdraft} %
@@ -44,6 +44,7 @@
 \RequirePackage{subcaption} % subfigure
 \RequirePackage{chngcntr} % new counter macros
 \RequirePackage[most]{tcolorbox} %
+\RequirePackage{placeins} % for \FloatBarrier
 % MUST BE PLACED LAST
 \RequirePackage{hyperref}
 \RequirePackage{hyperxmp}
@@ -167,6 +168,27 @@
 %\renewcommand{\footrulewidth}{0.2pt}
 %\renewcommand{\footruleskip}{1em}
 %\renewcommand{\subsectionmark}[1]{\markright{\thesubsection\ #1}}
+
+%%% FLOAT BARRIER
+\NewDocumentCommand{\tmp@section}{}{}%
+\NewDocumentCommand{\enablefencedsection}{}{%
+  \typeout{Cannot enable fenced section, because loaded class was not article or scrartcl.}
+}%
+\@ifclassloaded{article}{%
+  \RenewDocumentCommand{\enablefencedsection}{}{%
+    \RenewDocumentCommand{\tmp@section}{}{\section}%
+    \RenewDocumentCommand{\section}{}{\FloatBarrier\tmp@section}%
+  }%
+}{}
+\@ifclassloaded{scrartcl}{%
+  \RenewDocumentCommand{\enablefencedsection}{}{%
+    \addtokomafont{section}{\FloatBarrier\phantomsection}%
+  }%
+}{}
+
+%%% GLOSSARIES
+\setabbreviationstyle{short-nolong}%
+\setabbreviationstyle[acronym]{long-short}%
 
 %%% ENUMITEM
 % tabitemize

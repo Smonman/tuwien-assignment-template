@@ -55,6 +55,7 @@ This template loads a bunch of other packages:
 - `subcaption`
 - `chngcntr`
 - `tcolorbox`
+- `placeins`
 - `hyperref`
 - `hyperxmp`
 - `glossaries`
@@ -157,6 +158,13 @@ command.
 The author, Matrikel-Number, date, title and subtitle are optional, and default to an empty string.
 
 ## Changelog
+
+### 0.12.1
+
+- added new `\enablefencedsection` command that can be used with the document class `article` or `scrartcl`. It prepends a `\FloatBarrier` before each `section`
+- added new `.latexmkrc` file that includes a call to `makeglossaries`
+- set default abbreviation style to `short-nolong`
+- set default abbreviation style for acronyms to `long-short`
 
 ### 0.12.0
 
